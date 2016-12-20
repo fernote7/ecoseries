@@ -3,3 +3,4 @@
 export(datas)
 export(series_bacen)
 import(RCurl)
+import(xlsx)

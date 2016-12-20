@@ -4,7 +4,7 @@
 #' @param love Do you love cats? Defaults to TRUE.
 #' @keywords cats
 #' @export
-#' @import RCurl
+#' @import RCurl xlsx
 #' @examples
 #' cat_function()
 
@@ -12,6 +12,7 @@ series_bacen <- function(arg1, ...){
 
     datas = format(Sys.Date(), "%d/%m/%Y")
     inputs = as.character(list(arg1, ...))
+    #inputs = as.character(list(arg1, arg2))
     len = seq_along(inputs)
     serie = mapply(paste0, "serie_", inputs, USE.NAMES = FALSE)
 
@@ -23,8 +24,16 @@ series_bacen <- function(arg1, ...){
 
     for (i in len){
 
-        assign(serie[i], read.csv(textConnection(eval(as.symbol(
-        serie[i]))), header=T))
+
+        texto = read.csv(textConnection(eval(as.symbol(
+            serie[i]))), header=T)
+
+        texto$datas = gsub(' .*$','', eval(texto$data))
+
+        assign(serie[i], texto)
+
+        # assign(serie[i], read.csv(textConnection(eval(as.symbol(
+        # serie[i]))), header=T))
 
         #assign(eval(as.symbol(serie[i]))$dados, gsub(' .*$','', eval(as.symbol(serie[i]))$data))
 
@@ -33,5 +42,9 @@ series_bacen <- function(arg1, ...){
 
 
     for(i in len) {write.csv(eval(as.symbol(serie[i])), file = paste0(serie[i], ".csv"))}
+    for(i in len) {write.xlsx(eval(as.symbol(serie[i])), file = paste0(serie[i], ".xlsx"))}
+
+    #Physically open an excel file
+    shell.exec("Índice de Atividade Econômica do Bacen (IBC-BR) - Com ajuste.xlsm")
 
 }
