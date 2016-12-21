@@ -6,7 +6,8 @@
 #' @export
 #' @import RCurl xlsx
 #' @examples
-#' cat_function()
+#' series_bacen(1242,2134)
+#' series_bacen(1242,2134, file = "C:/Users/fernando.teixeira/Dropbox/Luciana+Maclá/Índice de Atividade Econômica do Bacen (IBC-BR) - Com ajuste.xlsm")
 
 series_bacen <- function(arg1, ..., file = NULL){
 
@@ -19,7 +20,7 @@ series_bacen <- function(arg1, ..., file = NULL){
 
     for (i in len){ assign(serie[i],
                              getURL(paste0('http://api.bcb.gov.br/dados/serie/bcdata.sgs.', inputs[i],
-                                           '/dados?formato=csv&dataInicial=01/04/1950&dataFinal=',datas),
+                                           '/dados?formato=csv&dataInicial=01/01/2003&dataFinal=',datas),
                                             ssl.verifyhost=FALSE, ssl.verifypeer=FALSE))}
 
 
@@ -43,7 +44,7 @@ series_bacen <- function(arg1, ..., file = NULL){
 
 
     for(i in len) {write.csv(eval(as.symbol(serie[i])), file = paste0(serie[i], ".csv"))}
-    for(i in len) {write.xlsx(eval(as.symbol(serie[i])), file = paste0(serie[i], ".xlsx"))}
+    for(i in len) {write.xlsx(eval(as.symbol(serie[i])), file = paste0(serie[i], ".xlsx"), row.names = FALSE)}
 
 
     if (!is.null(file)){

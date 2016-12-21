@@ -13,6 +13,7 @@ series_bacen(arg1, ..., file = NULL)
 This function allows you to express your love of cats.
 }
 \examples{
-cat_function()
+series_bacen(1242,2134)
+series_bacen(1242,2134, file = "C:/Users/fernando.teixeira/Dropbox/Luciana+Maclá/Índice de Atividade Econômica do Bacen (IBC-BR) - Com ajuste.xlsm")
 }
 \keyword{cats}
