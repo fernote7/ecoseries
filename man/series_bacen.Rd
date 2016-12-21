@@ -4,7 +4,7 @@
 \alias{series_bacen}
 \title{A Cat Function}
 \usage{
-series_bacen(arg1, ..., file = NULL)
+series_bacen(arg1, ..., file = NULL, save = "csv")
 }
 \arguments{
 \item{love}{Do you love cats? Defaults to TRUE.}
