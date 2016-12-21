@@ -11,6 +11,7 @@
 series_bacen <- function(arg1, ...){
 
     datas = format(Sys.Date(), "%d/%m/%Y")
+    # arg1 = 1242; arg2 = 2134
     inputs = as.character(list(arg1, ...))
     #inputs = as.character(list(arg1, arg2))
     len = seq_along(inputs)
@@ -45,6 +46,10 @@ series_bacen <- function(arg1, ...){
     for(i in len) {write.xlsx(eval(as.symbol(serie[i])), file = paste0(serie[i], ".xlsx"))}
 
     #Physically open an excel file
+    wd=getwd()
     shell.exec("Índice de Atividade Econômica do Bacen (IBC-BR) - Com ajuste.xlsm")
+
+    lista = list(wd = wd)
+    return(invisible(lista))
 
 }
