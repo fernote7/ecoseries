@@ -8,7 +8,7 @@
 #' @examples
 #' cat_function()
 
-series_bacen <- function(arg1, ...){
+series_bacen <- function(arg1, ..., file = NULL){
 
     datas = format(Sys.Date(), "%d/%m/%Y")
     # arg1 = 1242; arg2 = 2134
@@ -19,7 +19,7 @@ series_bacen <- function(arg1, ...){
 
     for (i in len){ assign(serie[i],
                              getURL(paste0('http://api.bcb.gov.br/dados/serie/bcdata.sgs.', inputs[i],
-                                           '/dados?formato=csv&dataInicial=01/04/2003&dataFinal=',datas),
+                                           '/dados?formato=csv&dataInicial=01/04/1950&dataFinal=',datas),
                                             ssl.verifyhost=FALSE, ssl.verifypeer=FALSE))}
 
 
@@ -45,11 +45,12 @@ series_bacen <- function(arg1, ...){
     for(i in len) {write.csv(eval(as.symbol(serie[i])), file = paste0(serie[i], ".csv"))}
     for(i in len) {write.xlsx(eval(as.symbol(serie[i])), file = paste0(serie[i], ".xlsx"))}
 
-    #Physically open an excel file
-    wd=getwd()
-    shell.exec("Índice de Atividade Econômica do Bacen (IBC-BR) - Com ajuste.xlsm")
 
-    lista = list(wd = wd)
-    return(invisible(lista))
+    if (!is.null(file)){
+    #Physically open an excel file
+        shell.exec(file)
+    }
+    # lista = list(wd = wd)
+    # return(invisible(lista))
 
 }

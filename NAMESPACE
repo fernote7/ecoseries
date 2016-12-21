@@ -2,5 +2,6 @@
 
 export(datas)
 export(series_bacen)
+export(series_bacen_anna)
 import(RCurl)
 import(xlsx)
