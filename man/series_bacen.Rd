@@ -2,7 +2,7 @@
 % Please edit documentation in R/series_bacen.R
 \name{series_bacen}
 \alias{series_bacen}
-\title{A Cat Function}
+\title{A function to extract series using}
 \usage{
 series_bacen(arg1, ..., file = NULL, save = "csv")
 }
