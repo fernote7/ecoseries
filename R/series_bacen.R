@@ -1,4 +1,4 @@
-#' A Cat Function
+#' A function to extract series using
 #'
 #' This function allows you to express your love of cats.
 #' @param love Do you love cats? Defaults to TRUE.
