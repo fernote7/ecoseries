@@ -7,7 +7,6 @@
 #' @import RCurl xlsx
 #' @examples
 #' series_bacen(1242,2134)
-#' series_bacen(1242,2134, file = "C:/Users/fernando.teixeira/Dropbox/Luciana+Maclá/Índice de Atividade Econômica do Bacen (IBC-BR) - Com ajuste.xlsm")
 
 series_bacen <- function(arg1, ..., save = ""){
 

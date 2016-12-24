@@ -1,4 +1,4 @@
-#' A function to extract BACEN series using their API
+#' A function to extract BACEN series specific to LUMA
 #'
 #' This function allows you to express your love of cats.
 #' @param love Do you love cats? Defaults to TRUE.
@@ -9,7 +9,7 @@
 #' series_bacen(1242,2134)
 #' series_bacen(1242,2134, file = "C:/Users/fernando.teixeira/Dropbox/Luciana+Maclá/Índice de Atividade Econômica do Bacen (IBC-BR) - Com ajuste.xlsm")
 
-series_bacen <- function(arg1, ..., file = NULL, save = "csv"){
+series_bacen_luma <- function(arg1, ..., file = NULL, save = "csv"){
 
     datas = format(Sys.Date(), "%d/%m/%Y")
     # arg1 = 1242; arg2 = 2134
