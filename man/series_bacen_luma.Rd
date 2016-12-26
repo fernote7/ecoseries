@@ -13,15 +13,14 @@ series_bacen_luma(arg1, ..., file = NULL, save = "csv")
 
 \item{file}{A xls or xlsx file you would like the function to open for you. Defaults to NULL.}
 
-\item{save}{A string specifying if data should be saved in csv or xlsx format. Defaults to not saving.}
+\item{save}{A string specifying if data should be saved in csv or xlsx format. 
+Defaults to not saving.}
 }
 \description{
-This function allows you to express your love of cats.
+A function to extract BACEN series specific to LUMA
 }
 \examples{
 series_bacen(1242,2134)
-series_bacen(1242,2134, file = 
-"C:/Users/user.name/Documents/yourfile.xlsm")
 }
 \keyword{cats}
 

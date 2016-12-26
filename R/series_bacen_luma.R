@@ -1,17 +1,16 @@
 #' A function to extract BACEN series specific to LUMA
 #'
-#' This function allows you to express your love of cats.
 #' @param arg1 Bacen series number.
 #' @param ... More series number.
 #' @param file A xls or xlsx file you would like the function to open for you. Defaults to NULL.
-#' @param save A string specifying if data should be saved in csv or xlsx format. Defaults to not saving.
+#' @param save A string specifying if data should be saved in csv or xlsx format. 
+#' Defaults to not saving.
 #' @keywords cats
 #' @export
 #' @import RCurl xlsx
 #' @examples
 #' series_bacen(1242,2134)
-#' series_bacen(1242,2134, file = 
-#' "C:/Users/user.name/Documents/yourfile.xlsm")
+
 
 series_bacen_luma <- function(arg1, ..., file = NULL, save = "csv"){
 
@@ -31,7 +30,7 @@ series_bacen_luma <- function(arg1, ..., file = NULL, save = "csv"){
     for (i in len){
 
 
-        texto = read.csv(textConnection(eval(as.symbol(
+        texto = utils::read.csv(textConnection(eval(as.symbol(
             serie[i]))), header=T)
 
         texto$datas = gsub(' .*$','', eval(texto$data))
@@ -47,7 +46,7 @@ series_bacen_luma <- function(arg1, ..., file = NULL, save = "csv"){
 
 
     if (save == "csv"){
-    for(i in len) {write.csv(eval(as.symbol(serie[i])), file = paste0(serie[i], ".csv"))}
+    for(i in len) {utils::write.csv(eval(as.symbol(serie[i])), file = paste0(serie[i], ".csv"))}
     } else if (save == "xls" | save == "xlsx") {
     for(i in len) {write.xlsx(eval(as.symbol(serie[i])), file = paste0(serie[i], ".xlsx"), row.names = FALSE)}} else{ stop("save argument must be 'csv' or 'xlsx' ")}
 

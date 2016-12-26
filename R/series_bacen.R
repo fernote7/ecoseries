@@ -1,7 +1,8 @@
 #' A function to extract BACEN series using their API
 #' @param arg1 Bacen series number.
 #' @param ... More series number.
-#' @param save A string specifying if data should be saved in csv or xlsx format. Defaults to not saving.
+#' @param save A string specifying if data should be saved in csv or xlsx format. 
+#' Defaults to not saving.
 #' @keywords bacen
 #' @export
 #' @import RCurl xlsx
@@ -27,7 +28,7 @@ series_bacen <- function(arg1, ..., save = ""){
 
 
     for (i in len){
-        texto = read.csv(textConnection(eval(as.symbol(
+        texto = utils::read.csv(textConnection(eval(as.symbol(
             serie[i]))), header=T)
         texto$data = gsub(' .*$','', eval(texto$data))
         assign(serie[i], texto)
@@ -38,7 +39,7 @@ series_bacen <- function(arg1, ..., save = ""){
     
     if (save != ""){
         if (save == "csv"){
-        for(i in len) {write.csv(eval(as.symbol(serie[i])), file = paste0(serie[i], ".csv"))}
+        for(i in len) {utils::write.csv(eval(as.symbol(serie[i])), file = paste0(serie[i], ".csv"))}
         } else if (save == "xls" | save == "xlsx") {
         for(i in len) {write.xlsx(eval(as.symbol(serie[i])), file = paste0(serie[i], ".xlsx"), 
                                   row.names = FALSE)}} else{ 

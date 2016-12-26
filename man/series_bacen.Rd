@@ -11,7 +11,8 @@ series_bacen(arg1, ..., save = "")
 
 \item{...}{More series number.}
 
-\item{save}{A string specifying if data should be saved in csv or xlsx format. Defaults to not saving.}
+\item{save}{A string specifying if data should be saved in csv or xlsx format. 
+Defaults to not saving.}
 }
 \description{
 A function to extract BACEN series using their API
