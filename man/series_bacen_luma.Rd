@@ -23,4 +23,3 @@ A function to extract BACEN series specific to LUMA
 series_bacen(1242,2134)
 }
 \keyword{cats}
-

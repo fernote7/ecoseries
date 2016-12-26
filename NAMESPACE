@@ -2,5 +2,6 @@
 
 export(series_bacen)
 export(series_bacen_luma)
+export(series_sidra)
 import(RCurl)
 import(xlsx)

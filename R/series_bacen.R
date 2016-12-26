@@ -1,6 +1,8 @@
 #' A function to extract BACEN series using their API
 #' @param arg1 Bacen series number.
 #' @param ... More series number.
+#' @param from A string specifying where the series shall start.
+#' @param to A string specifying where the series shall end.
 #' @param save A string specifying if data should be saved in csv or xlsx format. 
 #' Defaults to not saving.
 #' @keywords bacen
@@ -9,10 +11,18 @@
 #' @examples
 #' series_bacen(1242,2134)
 
-series_bacen <- function(arg1, ..., save = ""){
+series_bacen <- function(arg1, ..., from = "", to = "", save = ""){
 
+    
+    if (from == ""){
+    data_init = "01/01/1980"
+    } else {data_init = from}
+
+    if (to == ""){
     datas = format(Sys.Date(), "%d/%m/%Y")
     # arg1 = 1242; arg2 = 2134
+    } else {datas = to}
+    
     inputs = as.character(list(arg1, ...))
     #inputs = as.character(list(arg1, arg2))
     len = seq_along(inputs)
@@ -22,7 +32,7 @@ series_bacen <- function(arg1, ..., save = ""){
     for (i in len){ assign(serie[i],
                              getURL(paste0('http://api.bcb.gov.br/dados/serie/bcdata.sgs.',
                                            inputs[i], 
-                                           '/dados?formato=csv&dataInicial=01/01/2003&dataFinal=',
+                                           '/dados?formato=csv&dataInicial=', data_init, '&dataFinal=',
                                            datas),
                                             ssl.verifyhost=FALSE, ssl.verifypeer=FALSE))}
 

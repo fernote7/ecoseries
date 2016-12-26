@@ -4,12 +4,16 @@
 \alias{series_bacen}
 \title{A function to extract BACEN series using their API}
 \usage{
-series_bacen(arg1, ..., save = "")
+series_bacen(arg1, ..., from = "", to = "", save = "")
 }
 \arguments{
 \item{arg1}{Bacen series number.}
 
 \item{...}{More series number.}
+
+\item{from}{A string specifying where the series shall start.}
+
+\item{to}{A string specifying where the series shall end.}
 
 \item{save}{A string specifying if data should be saved in csv or xlsx format. 
 Defaults to not saving.}
@@ -21,4 +25,3 @@ A function to extract BACEN series using their API
 series_bacen(1242,2134)
 }
 \keyword{bacen}
-
