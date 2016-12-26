@@ -1,8 +1,8 @@
 #' A function to extract BACEN series using their API
-#'
-#' This function allows you to express your love of cats.
-#' @param love Do you love cats? Defaults to TRUE.
-#' @keywords cats
+#' @param arg1 Bacen series number.
+#' @param ... More series number.
+#' @param save A string specifying if data should be saved in csv or xlsx format. Defaults to not saving.
+#' @keywords bacen
 #' @export
 #' @import RCurl xlsx
 #' @examples

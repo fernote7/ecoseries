@@ -7,13 +7,17 @@
 series_bacen(arg1, ..., save = "")
 }
 \arguments{
-\item{love}{Do you love cats? Defaults to TRUE.}
+\item{arg1}{Bacen series number.}
+
+\item{...}{More series number.}
+
+\item{save}{A string specifying if data should be saved in csv or xlsx format. Defaults to not saving.}
 }
 \description{
-This function allows you to express your love of cats.
+A function to extract BACEN series using their API
 }
 \examples{
 series_bacen(1242,2134)
 }
-\keyword{cats}
+\keyword{bacen}
 

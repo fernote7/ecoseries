@@ -1,13 +1,17 @@
 #' A function to extract BACEN series specific to LUMA
 #'
 #' This function allows you to express your love of cats.
-#' @param love Do you love cats? Defaults to TRUE.
+#' @param arg1 Bacen series number.
+#' @param ... More series number.
+#' @param file A xls or xlsx file you would like the function to open for you. Defaults to NULL.
+#' @param save A string specifying if data should be saved in csv or xlsx format. Defaults to not saving.
 #' @keywords cats
 #' @export
 #' @import RCurl xlsx
 #' @examples
 #' series_bacen(1242,2134)
-#' series_bacen(1242,2134, file = "C:/Users/fernando.teixeira/Dropbox/Luciana+Maclá/Índice de Atividade Econômica do Bacen (IBC-BR) - Com ajuste.xlsm")
+#' series_bacen(1242,2134, file = 
+#' "C:/Users/user.name/Documents/yourfile.xlsm")
 
 series_bacen_luma <- function(arg1, ..., file = NULL, save = "csv"){
 
