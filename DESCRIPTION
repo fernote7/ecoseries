@@ -1,8 +1,9 @@
 Package: ecoseries
 Title: AN R INTERFACE TO BRAZILIAN CENTRAL BANK API
 Version: 0.0.0.9000
-Authors@R: person("Fernando", "Teixeira", email = "fernando.teixeira@fgv.com", role = c("aut", "cre"))
-Description: This package creates an R interface to the Bacen and Sidra (IBGE) API.
+Authors@R: c(person("Fernando", "Teixeira", email = "fernando.teixeira@fgv.br", role = c("aut", "cre")),
+			 person("Jonatha", "Azevedo", email = "jonatha.azevedo@fgv.br", role = "aut"))
+Description: This package creates an R interface to the Bacen and Sidra (IBGE) APIs.
 Depends:
     R (>= 3.3.1)
 License: GPL-2
