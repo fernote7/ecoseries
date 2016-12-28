@@ -13,18 +13,22 @@
 #' @export
 #' @import RCurl rjson
 #' @examples
-#' ibge=series_sidra(cod_tabela = "1612", formato = "n")    
+#' ibge=series_sidra(cod_tabela = 1612, formato = "a", header=TRUE)    
 
 series_sidra <- function(cod_tabela, periodos = "all", var = "allxp", terr = "n1/1", 
                          classe = "", dec = 2, header = FALSE, save = "", formato = "n"){
     
+    # cod_tabela = 1612; periodos = "all"; var = "allxp"; terr = "n1/1"; classe = ""; 
+    # dec=2; header=TRUE; save = ""; formato = "n"
+
+    cod_tabela = as.character(cod_tabela)
     terr = gsub(' ','%', terr)
     if (classe != "") {classe = paste0(classe, "/")}
     if (formato != "c" & formato != "n" & formato != "u" & formato != "a"){ 
         stop("formato argument must be 'c', 'n', 'u' or 'a' ")}
-    if ( header == TRUE | T) { 
+    if ( header == TRUE | header == T) { 
         header = "y"
-    } else if (header == FALSE | F) { 
+    } else if (header == FALSE | header == F) { 
         header = "n"
     } else { stop("header assume only TRUE or FALSE values")}
     
@@ -46,14 +50,19 @@ series_sidra <- function(cod_tabela, periodos = "all", var = "allxp", terr = "n1
         #assign(t1, tabela)
         tabela = rjson::fromJSON(tabela)
         tabela=data.frame(do.call("rbind", tabela))
+        if (header == "y"){
+            
+            colnames(tabela) = unlist(tabela[1,])
+            tabela = tabela[-1,]
+        }
         
         #Transformando a coluna V em valor
         
         valor = NULL
         
-        id = which(colnames(tabela)=="V")
+        id = which(colnames(tabela)=="V" | colnames(tabela)=="Valor")
             
-            tabela2 = tabela
+            #tabela2 = tabela
             #tabela2[tabela2[,id] ==  "..",id] <- NA
             #tabela2[,id] <- as.numeric(tabela2[,id])
             tabela[,id] = suppressWarnings(ifelse(tabela[,id]!="..", as.numeric(tabela[,id]),NA))

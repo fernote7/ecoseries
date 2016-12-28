@@ -31,6 +31,6 @@ Defaults to not saving.}
 A function to extract Sidra series using their API
 }
 \examples{
-ibge=series_sidra(cod_tabela = "1612", formato = "n")    
+ibge=series_sidra(cod_tabela = 1612, formato = "a", header=TRUE)    
 }
 \keyword{sidra}
