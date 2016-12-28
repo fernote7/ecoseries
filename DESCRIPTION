@@ -1,5 +1,5 @@
 Package: ecoseries
-Title: AN R INTERFACE TO BRAZILIAN CENTRAL BANK API
+Title: AN R INTERFACE TO BRAZILIAN CENTRAL BANK AND SIDRA API
 Version: 0.0.0.9000
 Authors@R: c(person("Fernando", "Teixeira", email = "fernando.teixeira@fgv.br", role = c("aut", "cre")),
 			 person("Jonatha", "Azevedo", email = "jonatha.azevedo@fgv.br", role = "aut"))
