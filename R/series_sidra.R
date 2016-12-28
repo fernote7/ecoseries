@@ -1,72 +1,67 @@
 #' A function to extract Sidra series using their API
-#' @param arg1 Sidra series number.
-#' @param ... More series number.
+#' @param cod_tabela Sidra series number.
+#' @param periodos Specifies the desired periods. Defaults to 'all'.
+#' @param var Specifies the desired variables. Defaults to 'allxp'.
+#' @param terr Specifies the desired territorial levels. Defaults to 'n1/1' - Brazil.
+#' @param classe Specifies the table classifications. Defaults to "".
+#' @param dec Specifies the desired decimals in table numbers.
+#' @param header Logical. Either TRUE or FALSE.
 #' @param save A string specifying if data should be saved in csv or xlsx format. 
 #' Defaults to not saving.
+#' @param formato Specifies the formatting of the table. Defaults to 'n' - metadata names only. 
 #' @keywords sidra
 #' @export
-#' @import RCurl xlsx
+#' @import RCurl rjson
 #' @examples
+#' ibge=series_sidra(cod_tabela = "1612", formato = "n")    
 
-
-cod_tabela = "1612"
-
-series_sidra <- function(cod_tabela, periodos = "last", var = "allxp", terr = "n1/1", 
-                         classe = "c1", format, dec = 2, header = TRUE, save = "", metadados = "a"){
+series_sidra <- function(cod_tabela, periodos = "all", var = "allxp", terr = "n1/1", 
+                         classe = "", dec = 2, header = FALSE, save = "", formato = "n"){
     
     terr = gsub(' ','%', terr)
     if (classe != "") {classe = paste0(classe, "/")}
-    if (metadados != "c" & metadados != "n" & metadados != "u" & metadados != "a"){ 
-        stop("metadados argument must be 'c', 'n', 'u' or 'a' ")}
-    if ( header == TRUE) { header = "y"} else { header = "n"}
+    if (formato != "c" & formato != "n" & formato != "u" & formato != "a"){ 
+        stop("formato argument must be 'c', 'n', 'u' or 'a' ")}
+    if ( header == TRUE | T) { 
+        header = "y"
+    } else if (header == FALSE | F) { 
+        header = "n"
+    } else { stop("header assume only TRUE or FALSE values")}
     
-    tabela=getURL(paste0("http://api.sidra.ibge.gov.br/values/",
+    tabela=RCurl::getURL(paste0("http://api.sidra.ibge.gov.br/values/",
                          "t/", cod_tabela, "/", terr, "/", classe, "p/", periodos, 
-                         "/v/", var, "/f/", metadados, "/h/", header),
+                         "/v/", var, "/f/", formato, "/h/", header),
              ssl.verifyhost=FALSE, ssl.verifypeer=FALSE)
     
-    tabela = fromJSON(tabela)
-    tabela=do.call("rbind", tabela)
     
-    # datas = format(Sys.Date(), "%d/%m/%Y")
-    # # arg1 = 1242; arg2 = 2134
-    # inputs = as.character(list(arg1, ...))
-    # #inputs = as.character(list(arg1, arg2))
-    # len = seq_along(inputs)
-    # serie = mapply(paste0, "serie_", inputs, USE.NAMES = FALSE)
-    # 
-    # 
-    # for (i in len){ assign(serie[i],
-    #                        getURL(paste0('http://api.bcb.gov.br/dados/serie/bcdata.sgs.',
-    #                                      inputs[i], 
-    #                                      '/dados?formato=csv&dataInicial=01/01/2003&dataFinal=',
-    #                                      datas),
-    #                               ssl.verifyhost=FALSE, ssl.verifypeer=FALSE))}
-    # 
-    # 
-    # for (i in len){
-    #     texto = utils::read.csv(textConnection(eval(as.symbol(
-    #         serie[i]))), header=T)
-    #     texto$data = gsub(' .*$','', eval(texto$data))
-    #     assign(serie[i], texto)
-    #     
-    # }
-    # 
-    # rm(texto)
-    # 
-    # if (save != ""){
-    #     if (save == "csv"){
-    #         for(i in len) {utils::write.csv(eval(as.symbol(serie[i])), file = paste0(serie[i], ".csv"))}
-    #     } else if (save == "xls" | save == "xlsx") {
-    #         for(i in len) {write.xlsx(eval(as.symbol(serie[i])), file = paste0(serie[i], ".xlsx"), 
-    #                                   row.names = FALSE)}} else{ 
-    #                                       stop("save argument must be 'csv' or 'xlsx' ")}
-    # }
-    # 
-    # lista = list()
-    # ls_df = ls()[grepl('data.frame', sapply(ls(), function(x) class(get(x))))]
-    # for ( obj in ls_df ) { lista[obj]=list(get(obj)) }
-    
-    return(invisible(lista))
+    if (strsplit(tabela, " ")[[1]][1] == "Par\uE2metro") {
+        
+        param = strsplit(tabela, " ")[[1]][3]
+        param = substr(param, 2, nchar(param)-1)
+        stop(sprintf("The parameter %s is misspecified", param))
+        
+        
+    } else{
+        t1 = paste("tabela", cod_tabela, sep="_")
+        #assign(t1, tabela)
+        tabela = rjson::fromJSON(tabela)
+        tabela=data.frame(do.call("rbind", tabela))
+        
+        #Transformando a coluna V em valor
+        
+        valor = NULL
+        
+        id = which(colnames(tabela)=="V")
+            
+            tabela2 = tabela
+            #tabela2[tabela2[,id] ==  "..",id] <- NA
+            #tabela2[,id] <- as.numeric(tabela2[,id])
+            tabela[,id] = suppressWarnings(ifelse(tabela[,id]!="..", as.numeric(tabela[,id]),NA))
+    }
+
+    assign(t1,tabela)
+    rm(tabela)
+
+    return(invisible(eval(as.symbol(t1))))
     
 }

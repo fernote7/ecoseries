@@ -4,17 +4,33 @@
 \alias{series_sidra}
 \title{A function to extract Sidra series using their API}
 \usage{
-series_sidra(arg1, ..., save = "")
+series_sidra(cod_tabela, periodos = "all", var = "allxp", terr = "n1/1",
+  classe = "", dec = 2, header = FALSE, save = "", formato = "n")
 }
 \arguments{
-\item{arg1}{Sidra series number.}
+\item{cod_tabela}{Sidra series number.}
 
-\item{...}{More series number.}
+\item{periodos}{Specifies the desired periods. Defaults to 'all'.}
+
+\item{var}{Specifies the desired variables. Defaults to 'allxp'.}
+
+\item{terr}{Specifies the desired territorial levels. Defaults to 'n1/1' - Brazil.}
+
+\item{classe}{Specifies the table classifications. Defaults to "".}
+
+\item{dec}{Specifies the desired decimals in table numbers.}
+
+\item{header}{Logical. Either TRUE or FALSE.}
 
 \item{save}{A string specifying if data should be saved in csv or xlsx format. 
 Defaults to not saving.}
+
+\item{formato}{Specifies the formatting of the table. Defaults to 'n' - metadata names only.}
 }
 \description{
 A function to extract Sidra series using their API
+}
+\examples{
+ibge=series_sidra(cod_tabela = "1612", formato = "n")    
 }
 \keyword{sidra}
