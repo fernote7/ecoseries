@@ -34,3 +34,4 @@ A function to extract Sidra series using their API
 ibge=series_sidra(cod_tabela = 1612, formato = "a", header=TRUE)    
 }
 \keyword{sidra}
+
