@@ -19,9 +19,9 @@ series_bacen <- function(arg1, ..., from = "", to = "", save = ""){
     } else {data_init = from}
 
     if (to == ""){
-    datas = format(Sys.Date(), "%d/%m/%Y")
+    data_end = format(Sys.Date(), "%d/%m/%Y")
     # arg1 = 1242; arg2 = 2134
-    } else {datas = to}
+    } else {data_end = to}
     
     inputs = as.character(list(arg1, ...))
     #inputs = as.character(list(arg1, arg2))
@@ -33,7 +33,7 @@ series_bacen <- function(arg1, ..., from = "", to = "", save = ""){
                              getURL(paste0('http://api.bcb.gov.br/dados/serie/bcdata.sgs.',
                                            inputs[i], 
                                            '/dados?formato=csv&dataInicial=', data_init, '&dataFinal=',
-                                           datas),
+                                           data_end),
                                             ssl.verifyhost=FALSE, ssl.verifypeer=FALSE))}
 
 
