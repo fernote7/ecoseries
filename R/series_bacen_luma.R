@@ -6,10 +6,9 @@
 #' @param save A string specifying if data should be saved in csv or xlsx format. 
 #' Defaults to not saving.
 #' @keywords cats
-#' @export
 #' @import RCurl xlsx
-#' @examples
-#' series_bacen(1242,2134)
+
+# series_bacen(1242,2134)
 
 
 series_bacen_luma <- function(arg1, ..., file = NULL, save = "csv"){

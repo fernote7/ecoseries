@@ -30,7 +30,7 @@ series_bacen <- function(arg1, ..., from = "", to = "", save = ""){
     
 
     for (i in len){ assign(serie[i],
-                             getURL(paste0('http://api.bcb.gov.br/dados/serie/bcdata.sgs.',
+                             RCurl::getURL(paste0('http://api.bcb.gov.br/dados/serie/bcdata.sgs.',
                                            inputs[i], 
                                            '/dados?formato=csv&dataInicial=', data_init, '&dataFinal=',
                                            data_end),
