@@ -5,7 +5,7 @@
 \title{A function to extract Sidra series using their API}
 \usage{
 series_sidra(cod_tabela, periodos = "all", var = "allxp", terr = "n1/1",
-  classe = "", dec = 2, header = FALSE, save = "", formato = "n")
+  classes = "", dec = 2, header = FALSE, save = "", formato = "n")
 }
 \arguments{
 \item{cod_tabela}{Sidra series number.}
@@ -16,7 +16,7 @@ series_sidra(cod_tabela, periodos = "all", var = "allxp", terr = "n1/1",
 
 \item{terr}{Specifies the desired territorial levels. Defaults to 'n1/1' - Brazil.}
 
-\item{classe}{Specifies the table classifications. Defaults to "".}
+\item{classes}{Specifies the table classifications. Defaults to "".}
 
 \item{dec}{Specifies the desired decimals in table numbers.}
 
@@ -28,7 +28,7 @@ Defaults to not saving.}
 \item{formato}{Specifies the formatting of the table. Defaults to 'n' - metadata names only.}
 }
 \description{
-A function to extract Sidra series using their API
+The different parameters define a table and its dimensions (periods, variables, territorial units and classification) to be consulted. The parameters that define the territorial units can be used more than once, allowing multiple distinct territorial searches with one request. The parameters that define the classes may vary from table to table, with a maximum of 6. Henceforth, a Sidra table ranges between 3 and 9 differente dimension (3 mandatory - periodos, var and terr and 6 optional).
 }
 \examples{
 ibge=series_sidra(cod_tabela = 1612, formato = "a", header=TRUE)    
