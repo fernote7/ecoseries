@@ -25,4 +25,3 @@ A function to extract BACEN series using their API
 series_bacen(1242,2134)
 }
 \keyword{bacen}
-

@@ -34,4 +34,3 @@ The different parameters define a table and its dimensions (periods, variables, 
 ibge=series_sidra(cod_tabela = 1612, formato = "a", header=TRUE)    
 }
 \keyword{sidra}
-

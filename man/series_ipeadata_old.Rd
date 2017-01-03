@@ -21,4 +21,3 @@ A function to extract Sidra series using their API
 }
 \keyword{ipea}
 \keyword{ipeadata}
-

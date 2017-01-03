@@ -1,16 +1,15 @@
 Package: ecoseries
-Title: AN R INTERFACE TO BRAZILIAN CENTRAL BANK AND SIDRA API
-Version: 0.0.0.9000
+Title: An R Interface to Brazilian Central Bank and IPEA APIs
+Version: 0.9
 Authors@R: c(person("Fernando", "Teixeira", email = "fernando.teixeira@fgv.br", role = c("aut", "cre")),
 			 person("Jonatha", "Azevedo", email = "jonatha.azevedo@fgv.br", role = "aut"))
-Description: This package creates an R interface to the Bacen and Sidra (IBGE)
-    APIs.
+Description: Creates an R interface to the Bacen and IPEA APIs.
 Depends:
     R (>= 3.3.1)
 License: GPL-2
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 5.0.1
+RoxygenNote: 5.0.1.9000
 Imports:
     RCurl,
     xlsx,

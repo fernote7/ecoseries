@@ -8,7 +8,7 @@
 #' @export
 #' @import rvest xml2 stats utils
 #' @examples
-#' ipea=series_ipeadata(394221910, 40940, periodicity = c("Y","D")) 
+#' ipea=series_ipeadata(394221910, periodicity = c("Y")) 
 
 
 series_ipeadata <- function(arg1, ..., periodicity = c("Y","D"), save = ""){
