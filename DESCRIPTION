@@ -1,22 +1,23 @@
 Package: ecoseries
-Title: An R interface to Brazilian Central Bank and IPEA APIs
+Title: An R Interface to Brazilian Central Bank API and IPEA data
 Version: 0.0.98
 Date: 2017-01-03
 Authors@R: c(person("Fernando", "Teixeira", email = "fernando.teixeira@fgv.br", role = c("aut", "cre")),
 			 person("Jonatha", "Azevedo", email = "jonatha.azevedo@fgv.br", role = "aut"))
-Maintainer: Fernando Teixeira <fernando.teixeira@fgv.br> 
-BugReport: https://github.com/fernote7/ecoseries/issues
-Description: Creates an R interface to the Bacen and IPEA APIs. 
+Maintainer: Fernando Teixeira <fernando.teixeira@fgv.br>
+BugReports: https://github.com/fernote7/ecoseries/issues
+Description: Creates an R interface to the Bacen <http://api.bcb.gov.br/> API and IPEA data <http://www.ipeadata.gov.br/Default.aspx>.
 Depends:
     R (>= 3.3.1)
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 5.0.1.9000
+RoxygenNote: 5.0.1
 Imports:
     RCurl,
     xlsx,
     rjson,
     rvest,
     stats,
-    xml2
+    xml2,
+    magrittr

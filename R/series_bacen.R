@@ -1,6 +1,5 @@
 #' A function to extract BACEN series using their API
-#' @param arg1 Bacen series number.
-#' @param ... More series number.
+#' @param x Bacen series numbers. Either an integer or a numeric vector.
 #' @param from A string specifying where the series shall start.
 #' @param to A string specifying where the series shall end.
 #' @param save A string specifying if data should be saved in csv or xlsx format. 
