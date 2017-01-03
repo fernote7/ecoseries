@@ -1,2 +1,2 @@
 # ecoseries
-function to capture BACEN, Sidra (IBGE) and IPEA series using their APIs
+function to capture BACEN and IPEA series using their APIs
