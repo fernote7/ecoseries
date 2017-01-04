@@ -9,8 +9,8 @@ before_script:
   - curl -OL http://raw.github.com/craigcitro/r-travis/master/scripts/travis-tool.sh
   - chmod 755 ./travis-tool.sh
   - ./travis-tool.sh bootstrap
-  - ./travis-tool.sh r_install maps scales colorspace raster
-  - ./travis-tool.sh install_github jimhester/covr
+  - ./travis-tool.sh r_install RCurl xlsx rjson rvest stats xml2 magrittr
+
 
 after_failure:
   - ./travis-tool.sh dump_logs
