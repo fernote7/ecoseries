@@ -1,9 +1,3 @@
 language: R
  cache: packages
  sudo: false
-
- addons:
-   apt:
-     packages:
-       - libgsl0-dev # for topicmodels
-       - libxml2-dev # for XML, a dependency of quanteda 
