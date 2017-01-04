@@ -14,4 +14,3 @@ The series_ipea function accesses a simpler section of the ipeadata website and 
 \keyword{economics}
 \keyword{ipea}
 \keyword{ipeadata}
-
