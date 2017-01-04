@@ -1,4 +1,4 @@
 language: R
 R:
 - 3.3
-script: series_bacen.R
+script: R/series_bacen.R
