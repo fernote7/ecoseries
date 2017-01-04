@@ -2,3 +2,4 @@ language: R
 R:
 - 3.3
 script: R/series_bacen.R
+sudo: required
