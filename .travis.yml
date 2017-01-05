@@ -1,0 +1,9 @@
+language: R
+cache: packages
+sudo: false
+os: 
+- linux
+
+r:
+- release
+- devel
