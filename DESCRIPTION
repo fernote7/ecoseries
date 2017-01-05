@@ -1,5 +1,5 @@
 Package: ecoseries
-Title: An R Interface to Brazilian Central Bank API and IPEA data
+Title: An R Interface to Brazilian Central Bank API and IPEA Data
 Version: 0.0.98
 Date: 2017-01-03
 Authors@R: c(person("Fernando", "Teixeira", email = "fernando.teixeira@fgv.br", role = c("aut", "cre")),
