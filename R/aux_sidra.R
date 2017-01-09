@@ -6,7 +6,7 @@
 #' @keywords sidra
 #' @import RCurl rjson
 #' @examples
-#' ibge=aux_sidra(cod_tabela = 1612, formato = "a", header=TRUE)    
+
 
 
 
