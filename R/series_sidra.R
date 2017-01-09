@@ -3,8 +3,8 @@
 #' The different parameters define a table and its dimensions (periods, variables, territorial units and classification) to be consulted. The parameters that define the territorial units can be used more than once, allowing multiple distinct territorial searches with one request. The parameters that define the classes may vary from table to table, with a maximum of 6. Henceforth, a Sidra table ranges between 3 and 9 differente dimension (3 mandatory - periods, var and terr and 6 optional).
 #' @param cod_tabela Sidra series number.
 #' @param periods Specifies the desired periods. Defaults to 'all'.
-#' @param var Specifies the desired variables. Defaults to 'allxp'.
-#' @param terr Specifies the desired territorial levels. Defaults to 'n1/1' - Brazil.
+#' @param variable Specifies the desired variables. Defaults to 'allxp'.
+#' @param territory Specifies the desired territorial levels. Defaults to 'n1/1' - Brazil.
 #' @param classes Specifies the table classifications. Defaults to "".
 #' @param dec Specifies the desired decimals in table numbers.
 #' @param header Logical. Either TRUE or FALSE.
@@ -14,13 +14,13 @@
 #' @keywords sidra
 #' @export
 #' @import RCurl rjson
-#' @examples
-#' ibge=series_sidra(cod_tabela = 1612, form = "a", header=TRUE)    
+
 
 series_sidra <- function(cod_tabela, periods = "all", variable = "all",
                      territory = c(n1 = "brazil", n2 = "region", n3 = "state", n6 = "municipality"), 
                      classes = "", dec = 2, header = FALSE, save = "", form = "a"){
     
+    # ibge=series_sidra(cod_tabela = 1612, form = "a", header=TRUE)
     # cod_tabela = 1612; periods = "all"; var = "allxp"; terr = "n1/1"; classes = ""; 
     # dec=2; header=TRUE; save = ""; form = "n"
 
@@ -42,7 +42,7 @@ series_sidra <- function(cod_tabela, periods = "all", variable = "all",
 
     
     tabela=RCurl::getURL(paste0("http://api.sidra.ibge.gov.br/values/",
-                         "t/", cod_tabela, "/", terr, "/", classes, "p/", periods, 
+                         "t/", cod_tabela, "/", territory, "/", classes, "p/", periods, 
                          "/v/", var, "/f/", form, "/h/", header),
              ssl.verifyhost=FALSE, ssl.verifypeer=FALSE)
     

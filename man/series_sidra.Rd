@@ -14,6 +14,13 @@ series_sidra(cod_tabela, periods = "all", variable = "all",
 
 \item{periods}{Specifies the desired periods. Defaults to 'all'.}
 
+<<<<<<< HEAD
+\item{variable}{Specifies the desired variables. Defaults to 'allxp'.}
+
+\item{territory}{Specifies the desired territorial levels. Defaults to 'n1/1' - Brazil.}
+
+=======
+>>>>>>> 110d7b7bb6a67f1a2f26caa22a5ca679cf99c57e
 \item{classes}{Specifies the table classifications. Defaults to "".}
 
 \item{dec}{Specifies the desired decimals in table numbers.}
@@ -24,15 +31,21 @@ series_sidra(cod_tabela, periods = "all", variable = "all",
 Defaults to not saving.}
 
 \item{form}{Specifies the formatting of the table. Defaults to 'n' - metadata names only.}
+<<<<<<< HEAD
+=======
 
 \item{var}{Specifies the desired variables. Defaults to 'allxp'.}
 
 \item{terr}{Specifies the desired territorial levels. Defaults to 'n1/1' - Brazil.}
+>>>>>>> 110d7b7bb6a67f1a2f26caa22a5ca679cf99c57e
 }
 \description{
 The different parameters define a table and its dimensions (periods, variables, territorial units and classification) to be consulted. The parameters that define the territorial units can be used more than once, allowing multiple distinct territorial searches with one request. The parameters that define the classes may vary from table to table, with a maximum of 6. Henceforth, a Sidra table ranges between 3 and 9 differente dimension (3 mandatory - periods, var and terr and 6 optional).
 }
+<<<<<<< HEAD
+=======
 \examples{
 ibge=series_sidra(cod_tabela = 1612, form = "a", header=TRUE)    
 }
+>>>>>>> 110d7b7bb6a67f1a2f26caa22a5ca679cf99c57e
 \keyword{sidra}

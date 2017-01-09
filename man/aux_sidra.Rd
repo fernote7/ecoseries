@@ -9,7 +9,15 @@ aux_sidra(cod_tabela, periods, variable, territory)
 \arguments{
 \item{cod_tabela}{Sidra series number.}
 
+<<<<<<< HEAD
+\item{periods}{Periodos}
+
+\item{variable}{Variáveis}
+
+\item{territory}{Specifies the desired territorial levels. Defaults to 'n1/1' - Brazil.}
+=======
 \item{terr}{Specifies the desired territorial levels. Defaults to 'n1/1' - Brazil.}
+>>>>>>> 110d7b7bb6a67f1a2f26caa22a5ca679cf99c57e
 }
 \description{
 The different parameters define a table and its dimensions (periods, variables, territorial units and classification) to be consulted. The parameters that define the territorial units can be used more than once, allowing multiple distinct territorial searches with one request. The parameters that define the classes may vary from table to table, with a maximum of 6. Henceforth, a Sidra table ranges between 3 and 9 differente dimension (3 mandatory - periodos, var and terr and 6 optional).
