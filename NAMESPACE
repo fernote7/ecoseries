@@ -2,7 +2,6 @@
 
 export(series_bacen)
 export(series_ipeadata)
-export(series_sidra)
 import(RCurl)
 import(magrittr)
 import(rjson)
