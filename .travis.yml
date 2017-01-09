@@ -3,6 +3,7 @@ cache: packages
 sudo: false
 os: 
 - linux
+- osx
 
 r:
 - release
