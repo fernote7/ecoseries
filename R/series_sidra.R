@@ -12,9 +12,10 @@
 #' @keywords sidra
 #' @export
 #' @import RCurl rjson
+#' @examples
+#' series_sidra(cod_tabela = 1612; from = ""; to = ""; territory = "brazil")
 
 
-# cod_tabela = 1612; from = ""; to = ""; territory = "brazil"
 
 series_sidra <- function(cod_tabela, from = "", to = "", territory = c(n1 = "brazil", n2 = "region", n3 = "state"), dec = 2, header = TRUE, save = ""){
     
