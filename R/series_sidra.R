@@ -16,34 +16,40 @@
 #' @import RCurl rjson
 
 
-series_sidra <- function(cod_tabela, periods = "all", variable = "all",
-                     territory = c(n1 = "brazil", n2 = "region", n3 = "state", n6 = "municipality"), 
-                     classes = "", dec = 2, header = FALSE, save = "", form = "a"){
-    
-    # ibge=series_sidra(cod_tabela = 1612, form = "a", header=TRUE)
-    # cod_tabela = 1612; periods = "all"; var = "allxp"; terr = "n1/1"; classes = ""; 
-    # dec=2; header=TRUE; save = ""; form = "n"
+# cod_tabela = 1612; from = ""; to = ""; territory = "brazil"
 
+series_sidra <- function(cod_tabela, from = "", to = "", territory = c(n1 = "brazil", n2 = "region", n3 = "state"), dec = 2, header = TRUE, save = ""){
     
-    if (classes != "") {classes = paste0(classes, "/")}
-    if (form != "c" & form != "n" & form != "u" & form != "a"){ 
-        stop("form argument must be 'c', 'n', 'u' or 'a' ")}
+    cod_tabela = as.character(cod_tabela)
+    
+    
+    if (from == ""){
+        data_init = "1980"
+    } else {data_init = from}
+    
+    if (to == ""){
+        data_end = format(Sys.Date(), "%Y")
+    } else {data_end = to}
+    
+    
+    # Território
+    territory <- base::match.arg(territory)
+    territory <- base::switch(territory,
+                              brazil = "n1/all", 
+                              region = "n2/all", 
+                              state = "n3/all")
+    
     if ( header == TRUE | header == T) { 
         header = "y"
     } else if (header == FALSE | header == F) { 
         header = "n"
     } else { stop("header assume only TRUE or FALSE values")}
 
-    aux1 <- aux_sidra(cod_tabela, periods, variable, territory)
-    
 
-    
-    
-
-    
     tabela=RCurl::getURL(paste0("http://api.sidra.ibge.gov.br/values/",
-                         "t/", cod_tabela, "/", territory, "/", classes, "p/", periods, 
-                         "/v/", var, "/f/", form, "/h/", header),
+                         "t/", cod_tabela, "/", territory, "/", "p/", 
+                         data_init, "-", data_end,  
+                         "/v/", "allxp", "/f/", "a", "/h/", header),
              ssl.verifyhost=FALSE, ssl.verifypeer=FALSE)
     
     
@@ -56,7 +62,6 @@ series_sidra <- function(cod_tabela, periods = "all", variable = "all",
         
     } else{
         t1 = paste("tabela", cod_tabela, sep="_")
-        #assign(t1, tabela)
         tabela = rjson::fromJSON(tabela)
         tabela=data.frame(do.call("rbind", tabela))
         if (header == "y"){

@@ -4,21 +4,13 @@
 \alias{series_sidra}
 \title{A function to extract Sidra series using their API}
 \usage{
-series_sidra(cod_tabela, periods = "all", variable = "all",
-  territory = c(n1 = "brazil", n2 = "region", n3 = "state", n6 =
-  "municipality"), classes = "", dec = 2, header = FALSE, save = "",
-  form = "a")
+series_sidra(cod_tabela, from = "", to = "", territory = c(n1 = "brazil",
+  n2 = "region", n3 = "state"), dec = 2, header = TRUE, save = "")
 }
 \arguments{
 \item{cod_tabela}{Sidra series number.}
 
-\item{periods}{Specifies the desired periods. Defaults to 'all'.}
-
-\item{variable}{Specifies the desired variables. Defaults to 'allxp'.}
-
 \item{territory}{Specifies the desired territorial levels. Defaults to 'n1/1' - Brazil.}
-
-\item{classes}{Specifies the table classifications. Defaults to "".}
 
 \item{dec}{Specifies the desired decimals in table numbers.}
 
@@ -26,6 +18,12 @@ series_sidra(cod_tabela, periods = "all", variable = "all",
 
 \item{save}{A string specifying if data should be saved in csv or xlsx format. 
 Defaults to not saving.}
+
+\item{periods}{Specifies the desired periods. Defaults to 'all'.}
+
+\item{variable}{Specifies the desired variables. Defaults to 'allxp'.}
+
+\item{classes}{Specifies the table classifications. Defaults to "".}
 
 \item{form}{Specifies the formatting of the table. Defaults to 'n' - metadata names only.}
 }
