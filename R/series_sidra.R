@@ -2,15 +2,13 @@
 #' 
 #' The different parameters define a table and its dimensions (periods, variables, territorial units and classification) to be consulted. The parameters that define the territorial units can be used more than once, allowing multiple distinct territorial searches with one request. The parameters that define the classes may vary from table to table, with a maximum of 6. Henceforth, a Sidra table ranges between 3 and 9 differente dimension (3 mandatory - periods, var and terr and 6 optional).
 #' @param cod_tabela Sidra series number.
-#' @param periods Specifies the desired periods. Defaults to 'all'.
-#' @param variable Specifies the desired variables. Defaults to 'allxp'.
-#' @param territory Specifies the desired territorial levels. Defaults to 'n1/1' - Brazil.
-#' @param classes Specifies the table classifications. Defaults to "".
+#' @param from A string specifying where the series shall start. Defaults to 1980.
+#' @param to A string specifying where the series shall end. Defaults to current year.
+#' @param territory Specifies the desired territorial levels.
 #' @param dec Specifies the desired decimals in table numbers.
 #' @param header Logical. Either TRUE or FALSE.
 #' @param save A string specifying if data should be saved in csv or xlsx format. 
 #' Defaults to not saving.
-#' @param form Specifies the formatting of the table. Defaults to 'n' - metadata names only. 
 #' @keywords sidra
 #' @export
 #' @import RCurl rjson

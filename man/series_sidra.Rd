@@ -10,6 +10,10 @@ series_sidra(cod_tabela, from = "", to = "", territory = c(n1 = "brazil",
 \arguments{
 \item{cod_tabela}{Sidra series number.}
 
+\item{from}{A string specifying where the series shall start.}
+
+\item{to}{A string specifying where the series shall end.}
+
 \item{territory}{Specifies the desired territorial levels. Defaults to 'n1/1' - Brazil.}
 
 \item{dec}{Specifies the desired decimals in table numbers.}
@@ -18,14 +22,6 @@ series_sidra(cod_tabela, from = "", to = "", territory = c(n1 = "brazil",
 
 \item{save}{A string specifying if data should be saved in csv or xlsx format. 
 Defaults to not saving.}
-
-\item{periods}{Specifies the desired periods. Defaults to 'all'.}
-
-\item{variable}{Specifies the desired variables. Defaults to 'allxp'.}
-
-\item{classes}{Specifies the table classifications. Defaults to "".}
-
-\item{form}{Specifies the formatting of the table. Defaults to 'n' - metadata names only.}
 }
 \description{
 The different parameters define a table and its dimensions (periods, variables, territorial units and classification) to be consulted. The parameters that define the territorial units can be used more than once, allowing multiple distinct territorial searches with one request. The parameters that define the classes may vary from table to table, with a maximum of 6. Henceforth, a Sidra table ranges between 3 and 9 differente dimension (3 mandatory - periods, var and terr and 6 optional).
