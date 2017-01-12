@@ -4,19 +4,17 @@
 \alias{series_sidra}
 \title{A function to extract Sidra series using their API}
 \usage{
-series_sidra(cod_tabela, from = "", to = "", territory = c(n1 = "brazil",
-  n2 = "region", n3 = "state"), dec = 2, header = TRUE, save = "")
+series_sidra(x, from = "", to = "", territory = c(n1 = "brazil", n2 =
+  "region", n3 = "state"), header = TRUE, save = "")
 }
 \arguments{
-\item{cod_tabela}{Sidra series number.}
+\item{x}{Sidra series number.}
 
-\item{from}{A string specifying where the series shall start.}
+\item{from}{A string specifying where the series shall start. Defaults to 1980.}
 
-\item{to}{A string specifying where the series shall end.}
+\item{to}{A string specifying where the series shall end. Defaults to current year.}
 
-\item{territory}{Specifies the desired territorial levels. Defaults to 'n1/1' - Brazil.}
-
-\item{dec}{Specifies the desired decimals in table numbers.}
+\item{territory}{Specifies the desired territorial levels.}
 
 \item{header}{Logical. Either TRUE or FALSE.}
 
@@ -25,5 +23,11 @@ Defaults to not saving.}
 }
 \description{
 The different parameters define a table and its dimensions (periods, variables, territorial units and classification) to be consulted. The parameters that define the territorial units can be used more than once, allowing multiple distinct territorial searches with one request. The parameters that define the classes may vary from table to table, with a maximum of 6. Henceforth, a Sidra table ranges between 3 and 9 differente dimension (3 mandatory - periods, var and terr and 6 optional).
+}
+\examples{
+sidra=series_sidra(x = c(1612), from = "", to = "", territory = "brazil")
+sidra=series_sidra(x = c(1358, 1612, 1432, 111,1234, 4216, 1, 3287), 
+from = "", to = "", territory = "brazil")
+sidra=series_sidra(x = c(1612,4216), from = "", to = "", territory = "state")
 }
 \keyword{sidra}
