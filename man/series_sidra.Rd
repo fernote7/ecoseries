@@ -26,9 +26,5 @@ The different parameters define a table and its dimensions (periods, variables, 
 }
 \examples{
 sidra=series_sidra(x = c(1612), from = "", to = "", territory = "brazil")
-sidra=series_sidra(x = c(1358, 1612, 1432, 111,1234, 4216, 1, 3287), 
-from = "", to = "", territory = "brazil")
-sidra=series_sidra(x = c(1612,4216), from = "", to = "", territory = "state")
 }
 \keyword{sidra}
-

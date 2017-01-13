@@ -15,4 +15,3 @@ aux_ipeadata(arg1, periodicity)
 A function to extract BACEN series using their API
 }
 \keyword{bacen}
-
