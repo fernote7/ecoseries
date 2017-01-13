@@ -31,3 +31,4 @@ from = "", to = "", territory = "brazil")
 sidra=series_sidra(x = c(1612,4216), from = "", to = "", territory = "state")
 }
 \keyword{sidra}
+

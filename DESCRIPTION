@@ -6,13 +6,14 @@ Authors@R: c(person("Fernando", "Teixeira", email = "fernando.teixeira@fgv.br", 
 			 person("Jonatha", "Azevedo", email = "jonatha.azevedo@fgv.br", role = "aut"))
 Maintainer: Fernando Teixeira <fernando.teixeira@fgv.br>
 BugReports: https://github.com/fernote7/ecoseries/issues
-Description: Creates an R interface to the Bacen <http://api.bcb.gov.br/> API and IPEA data <http://www.ipeadata.gov.br/Default.aspx>.
+Description: Creates an R interface to the Bacen <http://api.bcb.gov.br/> API
+    and IPEA data <http://www.ipeadata.gov.br/Default.aspx>.
 Depends:
     R (>= 3.3.1)
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 5.0.1.9000
+RoxygenNote: 5.0.1
 Imports:
     RCurl,
     xlsx,
@@ -21,4 +22,3 @@ Imports:
     stats,
     xml2,
     magrittr
-
