@@ -46,13 +46,17 @@ series_sidra <- function(x, from = "", to = "", territory = c(n1 = "brazil", n2 
     inputs = as.character(x)
     len = seq_along(inputs)
     serie = mapply(paste0, "serie_", inputs, USE.NAMES = FALSE)
-
+    
     for (i in len){
         tabela=RCurl::getURL(paste0("http://api.sidra.ibge.gov.br/values/",
-                             "t/", inputs[i], "/", territory, "/", "p/", 
-                             data_init, "-", data_end,  
-                             "/v/", "allxp", "/f/", "a", "/h/", header),
-                 ssl.verifyhost=FALSE, ssl.verifypeer=FALSE)
+                                    "t/", inputs[i], "/", territory, "/", "p/", 
+                                    data_init, "-", data_end,  
+                                    "/v/", "allxp", "/f/", "u", "/h/", header),
+                             ssl.verifyhost=FALSE, ssl.verifypeer=FALSE)
+        
+        # http://api.sidra.ibge.gov.br/values/t/3653/n3/all/p/200501-201612/v/allxp/f/u/h/y/C544/129314,129315    
+        # t/3653/f/c/h/n/n1/all/V/allxp/P/all/C544/129314,129315/d/s    
+        #    t/3653/n3/all/p/200501-201612/C544/129314,129315/v/allxp/f/u/h/y 
         
         
         if (strsplit(tabela, " ")[[1]][1] == "Par\uE2metro") {
@@ -61,7 +65,7 @@ series_sidra <- function(x, from = "", to = "", territory = c(n1 = "brazil", n2 
             
             
         } else if (strsplit(tabela, " ")[[1]][1] == "Tabela" & 
-                      strsplit(tabela, " ")[[1]][3] == "Tabela"){
+                   strsplit(tabela, " ")[[1]][3] == "Tabela"){
             
             param = strsplit(tabela, " ")[[1]][2]
             param = substr(param, 1, nchar(param)-1)
@@ -82,13 +86,13 @@ series_sidra <- function(x, from = "", to = "", territory = c(n1 = "brazil", n2 
             valor = NULL
             
             id = which(colnames(tabela)=="V" | colnames(tabela)=="Valor")
-                
-                #tabela2 = tabela
-                #tabela2[tabela2[,id] ==  "..",id] <- NA
-                #tabela2[,id] <- as.numeric(tabela2[,id])
-                tabela[,id] = suppressWarnings(ifelse(tabela[,id]!="..", as.numeric(tabela[,id]),NA))
+            
+            #tabela2 = tabela
+            #tabela2[tabela2[,id] ==  "..",id] <- NA
+            #tabela2[,id] <- as.numeric(tabela2[,id])
+            tabela[,id] = suppressWarnings(ifelse(tabela[,id]!="..", as.numeric(tabela[,id]),NA))
         }
-    
+        
         assign(serie[i],tabela)
         rm(tabela)
     }
@@ -96,7 +100,7 @@ series_sidra <- function(x, from = "", to = "", territory = c(n1 = "brazil", n2 
     lista = list()
     ls_df = ls()[grepl('data.frame', sapply(ls(), function(x) class(get(x))))]
     for ( obj in ls_df ) { lista[obj]=list(get(obj)) }
-
+    
     return(invisible(lista))
     
 }

@@ -34,7 +34,7 @@ series_bacen <- function(x, from = "", to = "", save = ""){
     serie = mapply(paste0, "serie_", inputs, USE.NAMES = FALSE)
     
     
-    for (i in len){ assign(serie[i],
+    for (i in len){ assign(serie[i], 
                            RCurl::getURL(paste0('http://api.bcb.gov.br/dados/serie/bcdata.sgs.',
                                                 inputs[i], 
                                                 '/dados?formato=csv&dataInicial=', data_init, '&dataFinal=',
