@@ -1,7 +1,3 @@
-#' A function to extract BACEN series using their API
-#' @param arg1 Bacen series number.
-#' @param periodicity A string specifying the periodicity.
-#' @keywords bacen
 #' @import rvest xml2 magrittr
 
 aux_ipeadata <- function(arg1, periodicity){
