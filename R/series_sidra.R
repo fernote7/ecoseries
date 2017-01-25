@@ -50,7 +50,7 @@ series_sidra <- function(x, from = "", to = "", territory = c(n1 = "brazil", n2 
     if (! is.null(secoes)){
         for (i in seq_along(secoes)){
         
-        secoes[i] = paste0("/c/", secoes[[i]][1], "/", 
+        secoes[i] = paste0("/c", secoes[[i]][1], "/", 
                            paste0(secoes[[i]][2:length(secoes[[i]])], collapse = ","))
         }
     }
