@@ -9,14 +9,12 @@
 #' @param save A string specifying if data should be saved in csv or xlsx format. 
 #' Defaults to not saving.
 #' @keywords sidra
-#' @export
 #' @import RCurl rjson
 #' @examples
 #' sidra=series_sidra(x = c(1612), from = "", to = "", territory = "brazil")
-#' sidra=series_sidra(x = c(3653, 3651, 3652), from = "200201", to = "201512", territory = "brazil", secoes = list(c(544,129316,129330), c(543,129282,129299)))
 
 
-series_sidra <- function(x, from = "", to = "", territory = c(n1 = "brazil", n2 = "region", n3 = "state"), header = TRUE, save = "", secoes = NULL){
+series_sidra2 <- function(x, from = "", to = "", territory = c(n1 = "brazil", n2 = "region", n3 = "state"), header = TRUE, save = ""){
     
     x = as.character(x)
     
@@ -44,20 +42,6 @@ series_sidra <- function(x, from = "", to = "", territory = c(n1 = "brazil", n2 
     } else { stop("header assume only TRUE or FALSE values")}
     
     
-    
-    
-    
-    if (! is.null(secoes)){
-        for (i in seq_along(secoes)){
-        
-        secoes[i] = paste0("/c/", secoes[[i]][1], "/", 
-                           paste0(secoes[[i]][2:length(secoes[[i]])], collapse = ","))
-        }
-    }
-    secoes = c(secoes, rep('', length(x)-length(secoes)))
-    
-    
-    
     inputs = as.character(x)
     len = seq_along(inputs)
     serie = mapply(paste0, "serie_", inputs, USE.NAMES = FALSE)
@@ -66,11 +50,12 @@ series_sidra <- function(x, from = "", to = "", territory = c(n1 = "brazil", n2 
         tabela=RCurl::getURL(paste0("http://api.sidra.ibge.gov.br/values/",
                                     "t/", inputs[i], "/", territory, "/", "p/", 
                                     data_init, "-", data_end,  
-                                    "/v/", "allxp", "/f/", "u", "/h/", header,
-                                    secoes[[3]]),
+                                    "/v/", "allxp", "/f/", "u", "/h/", header),
                              ssl.verifyhost=FALSE, ssl.verifypeer=FALSE)
         
-        # http://api.sidra.ibge.gov.br/values/t/3653/n3/all/p/200501-201612/v/allxp/f/u/h/y/C544/129314,129315    
+        # tabela=data.frame(do.call("rbind", rjson::fromJSON(RCurl::getURL("http://api.sidra.ibge.gov.br/values/t/3653/n3/all/p/200501-201612/v/allxp/f/u/h/y/C544/129314,129315", ssl.verifyhost=FALSE, ssl.verifypeer=FALSE))))
+        
+        # tabela2=RCurl::getURL("http://api.sidra.ibge.gov.br/values/t/3653/n3/all/p/200501-201612/v/allxp/f/u/h/y/C544/all", ssl.verifyhost=FALSE, ssl.verifypeer=FALSE)    
         # t/3653/f/c/h/n/n1/all/V/allxp/P/all/C544/129314,129315/d/s    
         #    t/3653/n3/all/p/200501-201612/C544/129314,129315/v/allxp/f/u/h/y 
         
@@ -106,8 +91,7 @@ series_sidra <- function(x, from = "", to = "", territory = c(n1 = "brazil", n2 
             #tabela2 = tabela
             #tabela2[tabela2[,id] ==  "..",id] <- NA
             #tabela2[,id] <- as.numeric(tabela2[,id])
-            tabela[,id] = suppressWarnings(ifelse(tabela[,id]!="..", 
-                                                  as.numeric(tabela[,id]),NA))
+            tabela[,id] = suppressWarnings(ifelse(tabela[,id]!="..", as.numeric(tabela[,id]),NA))
         }
         
         assign(serie[i],tabela)
