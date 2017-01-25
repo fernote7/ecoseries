@@ -67,7 +67,7 @@ series_sidra <- function(x, from = "", to = "", territory = c(n1 = "brazil", n2 
                                     "t/", inputs[i], "/", territory, "/", "p/", 
                                     data_init, "-", data_end,  
                                     "/v/", "allxp", "/f/", "u", "/h/", header,
-                                    secoes[[3]]),
+                                    secoes[[i]]),
                              ssl.verifyhost=FALSE, ssl.verifypeer=FALSE)
         
         # http://api.sidra.ibge.gov.br/values/t/3653/n3/all/p/200501-201612/v/allxp/f/u/h/y/C544/129314,129315    
