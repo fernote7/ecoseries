@@ -4,15 +4,15 @@
 \alias{series_sidra}
 \title{A function to extract Sidra series using their API}
 \usage{
-series_sidra(x, from = "", to = "", territory = c(n1 = "brazil", n2 =
-  "region", n3 = "state"), header = TRUE, save = "", secoes = NULL)
+series_sidra(x, from = NULL, to = NULL, territory = c(n1 = "brazil", n2 =
+  "region", n3 = "state"), header = TRUE, save = "", sections = NULL)
 }
 \arguments{
 \item{x}{Sidra series number.}
 
-\item{from}{A string specifying where the series shall start. Defaults to 1980.}
+\item{from}{A string or character vector specifying where the series shall start. Defaults to 1980.}
 
-\item{to}{A string specifying where the series shall end. Defaults to current year.}
+\item{to}{A string or character vector specifying where the series shall end. Defaults to current year.}
 
 \item{territory}{Specifies the desired territorial levels.}
 
@@ -20,12 +20,15 @@ series_sidra(x, from = "", to = "", territory = c(n1 = "brazil", n2 =
 
 \item{save}{A string specifying if data should be saved in csv or xlsx format. 
 Defaults to not saving.}
+
+\item{sections}{A vector containing the classification code in the first slot and the desired tables from this classification.}
 }
 \description{
-The different parameters define a table and its dimensions (periods, variables, territorial units and classification) to be consulted. The parameters that define the territorial units can be used more than once, allowing multiple distinct territorial searches with one request. The parameters that define the classes may vary from table to table, with a maximum of 6. Henceforth, a Sidra table ranges between 3 and 9 differente dimension (3 mandatory - periods, var and terr and 6 optional).
+The different parameters define a table and its dimensions (periods, variables, territorial units and classification) to be consulted. The parameters that define the sections may vary from table to table. Henceforth, the Sidra function ranges between 2 mandatory arguments - x (the series number) and territory (the geographic scope) to 5 arguments, where you can input the time window wanted and the sections.
 }
 \examples{
-sidra=series_sidra(x = c(1612), from = "", to = "", territory = "brazil")
-sidra=series_sidra(x = c(3653, 3651, 3652), from = "200201", to = "201512", territory = "brazil", secoes = list(c(544,129316,129330), c(543,129282,129299)))
+sidra=series_sidra(x = c(1612), from = NULL, to = NULL, territory = "brazil")
+sidra=series_sidra(x = c(3653), from = c("200201"), 
+to = c("201512"), territory = "brazil", sections = list(c(544,129316,129330)))
 }
 \keyword{sidra}
