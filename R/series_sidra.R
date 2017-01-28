@@ -37,7 +37,9 @@ series_sidra <- function(x, from = NULL, to = NULL, territory = c(n1 = "brazil",
         data_end = rep(to, length(x))
     }else {data_end = as.character(to)}
     
-
+    if (variable == "allxp"){
+        variable = rep(variable, length(x))
+    }
         
     # Território
     territory <- base::match.arg(territory)
