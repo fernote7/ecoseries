@@ -14,7 +14,7 @@
 #' @export
 #' @import RCurl rjson
 #' @examples
-#' sidra=series_sidra(x = c(1612), from = NULL, to = NULL, territory = "brazil")
+#' sidra=series_sidra(x = c(1612), from = 1990, to = 2015, territory = "brazil")
 #' sidra=series_sidra(x = c(3653), from = c("200201"), 
 #' to = c("201512"), territory = "brazil", 
 #' variable = 3135, sections = list(c(544,129316,129330)))
@@ -79,7 +79,7 @@ series_sidra <- function(x, from = NULL, to = NULL, territory = c(n1 = "brazil",
                                     "t/", inputs[i], "/", territory, "/", "p/", 
                                     data_init[i], "-", data_end[i],  
                                     "/v/", variable[i], "/f/", "u", "/h/", header,
-                                    "/", sections[[i]]),
+                                    sections[[i]]),
                              ssl.verifyhost=FALSE, ssl.verifypeer=FALSE)
         
         # http://api.sidra.ibge.gov.br/values/t/3653/n3/all/p/200501-201612/v/allxp/f/u/h/y/C544/129314,129315    

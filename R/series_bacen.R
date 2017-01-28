@@ -8,7 +8,7 @@
 #' @export
 #' @import RCurl xlsx
 #' @examples
-#' series_bacen(c(1242,2134))
+#' bacen = series_bacen(c(1242,2134))
 
 series_bacen <- function(x, from = "", to = "", save = ""){
     
@@ -44,12 +44,18 @@ series_bacen <- function(x, from = "", to = "", save = ""){
                                ssl.verifyhost=FALSE, ssl.verifypeer=FALSE))}
     
     
+    
+    
     for (i in len){
-        texto = utils::read.csv(textConnection(eval(as.symbol(
-            serie[i]))), header=T)
-        texto$data = gsub(' .*$','', eval(texto$data))
-        assign(serie[i], texto)
-        
+        tryCatch({
+            texto = utils::read.csv(textConnection(eval(as.symbol(
+                serie[i]))), header=T) 
+            texto$data = gsub(' .*$','', eval(texto$data))
+            assign(serie[i], texto)},
+        error=function(cond) {
+            message(paste(serie[i], "could not be downloaded."))
+        }
+        )
     }
     
     rm(texto)
