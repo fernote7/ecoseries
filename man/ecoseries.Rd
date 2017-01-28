@@ -19,3 +19,4 @@ The series_sidra function uses the Sidra API ("http://api.sidra.ibge.gov.br") to
 \keyword{ipea}
 \keyword{ipeadata}
 \keyword{sidra}
+

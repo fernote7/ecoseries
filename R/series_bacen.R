@@ -8,7 +8,7 @@
 #' @export
 #' @import RCurl xlsx
 #' @examples
-#' series_bacen(1242,2134)
+#' series_bacen(c(1242,2134))
 
 series_bacen <- function(x, from = "", to = "", save = ""){
     
@@ -35,11 +35,13 @@ series_bacen <- function(x, from = "", to = "", save = ""){
     
     
     for (i in len){ assign(serie[i], 
-                           RCurl::getURL(paste0('http://api.bcb.gov.br/dados/serie/bcdata.sgs.',
-                                                inputs[i], 
-                                                '/dados?formato=csv&dataInicial=', data_init, '&dataFinal=',
-                                                data_end),
-                                         ssl.verifyhost=FALSE, ssl.verifypeer=FALSE))}
+                           RCurl::getURL(
+                               paste0('http://api.bcb.gov.br/dados/serie/bcdata.sgs.',
+                                      inputs[i],
+                                      '/dados?formato=csv&dataInicial=', 
+                                      data_init, '&dataFinal=',
+                                      data_end), 
+                               ssl.verifyhost=FALSE, ssl.verifypeer=FALSE))}
     
     
     for (i in len){

@@ -1,6 +1,6 @@
 #' A function to extract Sidra series using their API
 #' 
-#' The different parameters define a table and its dimensions (periods, variables, territorial units and classification) to be consulted. The parameters that define the sections may vary from table to table. Henceforth, the Sidra function ranges between 2 mandatory arguments - x (the series number) and territory (the geographic scope) to 5 arguments, where you can input the time window wanted and the sections.
+#' The different parameters define the table and its dimensions (periods, variables, territorial units and classification) to be consulted. The parameters that define the sections may vary from table to table. Henceforth, the Sidra function ranges between 2 mandatory arguments - x (the series number) and territory (the geographic scope) to 6 arguments, where you can input the time window wanted, the variables and the sections. You can only choose one variable per series per request, but multiple sections within the variable.
 #' @param x Sidra series number.
 #' @param from A string or character vector specifying where the series shall start. Defaults to 1980.
 #' @param to A string or character vector specifying where the series shall end. Defaults to current year.
@@ -8,6 +8,7 @@
 #' @param header Logical. Either TRUE or FALSE.
 #' @param save A string specifying if data should be saved in csv or xlsx format. 
 #' Defaults to not saving.
+#' @param variable An integer describing what variable characteristics are to be returned. Defaults to all available.
 #' @param sections A vector containing the classification code in the first slot and the desired tables from this classification.
 #' @keywords sidra
 #' @export
@@ -15,10 +16,11 @@
 #' @examples
 #' sidra=series_sidra(x = c(1612), from = NULL, to = NULL, territory = "brazil")
 #' sidra=series_sidra(x = c(3653), from = c("200201"), 
-#' to = c("201512"), territory = "brazil", sections = list(c(544,129316,129330)))
+#' to = c("201512"), territory = "brazil", 
+#' variable = 3135, sections = list(c(544,129316,129330)))
 
 
-series_sidra <- function(x, from = NULL, to = NULL, territory = c(n1 = "brazil", n2 = "region", n3 = "state"), header = TRUE, save = "", sections = NULL){
+series_sidra <- function(x, from = NULL, to = NULL, territory = c(n1 = "brazil", n2 = "region", n3 = "state"), header = TRUE, save = "", variable = "allxp", sections = NULL){
     
     x = as.character(x)
     
@@ -58,7 +60,8 @@ series_sidra <- function(x, from = NULL, to = NULL, territory = c(n1 = "brazil",
         for (i in seq_along(sections)){
         
         sections[i] = paste0("/c", sections[[i]][1], "/", 
-                           paste0(sections[[i]][2:length(sections[[i]])], collapse = ","))
+                           paste0(sections[[i]][2:length(sections[[i]])], 
+                                  collapse = ","))
         }
     }
     sections = c(sections, rep('', length(x)-length(sections)))
@@ -73,8 +76,8 @@ series_sidra <- function(x, from = NULL, to = NULL, territory = c(n1 = "brazil",
         tabela=RCurl::getURL(paste0("http://api.sidra.ibge.gov.br/values/",
                                     "t/", inputs[i], "/", territory, "/", "p/", 
                                     data_init[i], "-", data_end[i],  
-                                    "/v/", "allxp", "/f/", "u", "/h/", header,
-                                    sections[[i]]),
+                                    "/v/", variable[i], "/f/", "u", "/h/", header,
+                                    "/", sections[[i]]),
                              ssl.verifyhost=FALSE, ssl.verifypeer=FALSE)
         
         # http://api.sidra.ibge.gov.br/values/t/3653/n3/all/p/200501-201612/v/allxp/f/u/h/y/C544/129314,129315    
