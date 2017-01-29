@@ -4,3 +4,4 @@
 ^\.Rprofile$
 ^appveyor\.yml$
 ^\.travis\.yml$
+^cran-comments\.md$

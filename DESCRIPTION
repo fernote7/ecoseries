@@ -1,13 +1,12 @@
 Package: ecoseries
 Title: An R Interface to Brazilian Central Bank and Sidra APIs and the IPEA Data
-Version: 0.0.99
+Version: 0.1.00
 Date: 2017-01-13
 Authors@R: c(person("Fernando", "Teixeira", email = "fernando.teixeira@fgv.br", role = c("aut", "cre")),
 			 person("Jonatha", "Azevedo", email = "jonatha.azevedo@fgv.br", role = "aut"))
 Maintainer: Fernando Teixeira <fernando.teixeira@fgv.br>
 BugReports: https://github.com/fernote7/ecoseries/issues
-Description: Creates an R interface to the Bacen <http://api.bcb.gov.br/
-    > and Sidra <http://api.sidra.ibge.gov.br> APIs and IPEA data <http://
+Description: Creates an R interface to the Bacen <http://api.bcb.gov.br/> and Sidra <http://api.sidra.ibge.gov.br> APIs and IPEA data <http://
     www.ipeadata.gov.br/Default.aspx>.
 Depends:
     R (>= 3.3.1)
@@ -22,6 +21,7 @@ Imports:
     rvest,
     stats,
     xml2,
-    magrittr
+    magrittr,
+    Rcpp
 Suggests: testthat,
     covr
