@@ -23,4 +23,5 @@ Imports:
     stats,
     xml2,
     magrittr
-Suggests: testthat
+Suggests: testthat,
+    covr
