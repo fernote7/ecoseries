@@ -53,7 +53,7 @@ series_bacen <- function(x, from = "", to = "", save = ""){
             texto$data = gsub(' .*$','', eval(texto$data))
             assign(serie[i], texto)},
         error=function(cond) {
-            message(paste(serie[i], "could not be downloaded."))
+            message(paste(serie[i], "could not be downloaded due to BCB server instability."))
         }
         )
     }

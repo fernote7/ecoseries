@@ -20,7 +20,7 @@ Defaults to not saving.}
 A function to extract BACEN series using their API
 }
 \examples{
-bacen = series_bacen(c(1242,2134))
+bacen = series_bacen(c(1242))
 }
 \keyword{bacen}
 
