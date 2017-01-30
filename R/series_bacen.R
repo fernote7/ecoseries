@@ -8,7 +8,7 @@
 #' @export
 #' @import RCurl xlsx
 #' @examples
-#' bacen = series_bacen(c(1242,2134))
+#' bacen = series_bacen(x=c(2465))
 
 series_bacen <- function(x, from = "", to = "", save = ""){
     
@@ -76,3 +76,5 @@ series_bacen <- function(x, from = "", to = "", save = ""){
     return(invisible(lista))
     
 }
+
+bacen = series_bacen(x=c(2465,2134))

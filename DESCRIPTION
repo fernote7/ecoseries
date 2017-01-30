@@ -13,7 +13,7 @@ Depends:
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 5.0.1
+RoxygenNote: 5.0.1.9000
 Imports:
     RCurl,
     xlsx,
@@ -23,5 +23,3 @@ Imports:
     xml2,
     magrittr,
     Rcpp
-Suggests: testthat,
-    covr
