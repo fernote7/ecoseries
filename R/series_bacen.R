@@ -76,5 +76,3 @@ series_bacen <- function(x, from = "", to = "", save = ""){
     return(invisible(lista))
     
 }
-
-bacen = series_bacen(x=c(2465,2134))
