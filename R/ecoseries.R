@@ -1,7 +1,7 @@
-#' @title An R interface to Brazilian Central Bank and Sidra APIs and the IPEA data
+#' @title An R interface to Brazilian Central Bank and Sidra APIs and the IPEA data website
 #' 
 #' @name ecoseries
-#' @description The ecoseries package has two main functions, one to gather data from the Brazilian Central Bank (Bacen) and another to gather Institute of Applied Economic Research data (IPEA).
+#' @description The ecoseries package has three main functions, two to gather data from the Brazilian Central Bank (Bacen) and Sidra (IBGE) and another to gather Institute of Applied Economic Research data (IPEA).
 #' 
 #' The series_bacen function takes advantage of the Bacen API ("http://api.bcb.gov.br/") to access this sistem "https://www3.bcb.gov.br/sgspub/localizarseries/localizarSeries.do?method=prepararTelaLocalizarSeries", load and save the series. You can either save in csv or xlsx formats.
 #' 
