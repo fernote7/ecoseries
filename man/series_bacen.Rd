@@ -23,3 +23,4 @@ A function to extract BACEN series using their API
 bacen = series_bacen(x=c(2465, 1242))
 }
 \keyword{bacen}
+

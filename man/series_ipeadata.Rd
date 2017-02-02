@@ -24,3 +24,4 @@ ipea=series_ipeadata(394221910, periodicity = c("Y"))
 }
 \keyword{ipea}
 \keyword{ipeadata}
+

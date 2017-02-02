@@ -6,7 +6,8 @@
 #' Defaults to not saving.
 #' @keywords bacen
 #' @export
-#' @import RCurl xlsx
+#' @import RCurl xlsx 
+#' @importFrom readr read_csv write_csv
 #' @examples
 #' bacen = series_bacen(x=c(2465, 1242))
 
@@ -62,8 +63,8 @@ series_bacen <- function(x, from = "", to = "", save = ""){
     
     for (i in len) {
         tryCatch({
-            texto = utils::read.csv(textConnection(eval(as.symbol(serie[i]))), 
-                                    header = T)
+            texto = readr::read_csv(eval(as.symbol(serie[i])), 
+                                    col_names = T)
             texto$data = gsub(" .*$", "", eval(texto$data))
             assign(serie[i], texto)
         }, error = function(cond) {
@@ -76,8 +77,8 @@ series_bacen <- function(x, from = "", to = "", save = ""){
     
     if (save != ""){
         if (save == "csv"){
-            for(i in len) {utils::write.csv(eval(as.symbol(serie[i])), 
-                                            file = paste0(serie[i], ".csv"))}
+            for(i in len) {readr::write_csv(eval(as.symbol(serie[i])), 
+                                            path = paste0(serie[i], ".csv"))}
         } else if (save == "xls" | save == "xlsx") {
             for(i in len) {write.xlsx(eval(as.symbol(serie[i])), 
                                       file = paste0(serie[i], ".xlsx"), 
