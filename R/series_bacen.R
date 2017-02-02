@@ -59,6 +59,21 @@ series_bacen <- function(x, from = "", to = "", save = ""){
     
     rm(result)
     
+    
+    for (i in len) {
+        tryCatch({
+            texto = utils::read.csv(textConnection(eval(as.symbol(serie[i]))), 
+                                    header = T)
+            texto$data = gsub(" .*$", "", eval(texto$data))
+            assign(serie[i], texto)
+        }, error = function(cond) {
+            message(paste(serie[i], 
+                          "could not be downloaded due to BCB server instability."))
+        })
+    }
+    rm(texto)
+    
+    
     if (save != ""){
         if (save == "csv"){
             for(i in len) {utils::write.csv(eval(as.symbol(serie[i])), 
