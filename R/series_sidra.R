@@ -12,7 +12,7 @@
 #' @param sections A vector containing the classification code in the first slot and the desired tables from this classification.
 #' @keywords sidra
 #' @export
-#' @import RCurl rjson
+#' @import RCurl rjson tibble
 #' @examples
 #' sidra=series_sidra(x = c(1612), from = 1990, to = 2015, territory = "brazil")
 #' sidra=series_sidra(x = c(3653), from = c("200201"), 
@@ -102,7 +102,7 @@ series_sidra <- function(x, from = NULL, to = NULL, territory = c(n1 = "brazil",
         } else{
             t1 = paste("tabela", x, sep="_")
             tabela = rjson::fromJSON(tabela)
-            tabela=data.frame(do.call("rbind", tabela))
+            tabela = tibble::as_data_frame(do.call("rbind", tabela))
             if (header == "y"){
                 
                 colnames(tabela) = unlist(tabela[1,])
@@ -118,8 +118,8 @@ series_sidra <- function(x, from = NULL, to = NULL, territory = c(n1 = "brazil",
             #tabela2 = tabela
             #tabela2[tabela2[,id] ==  "..",id] <- NA
             #tabela2[,id] <- as.numeric(tabela2[,id])
-            tabela[,id] = suppressWarnings(ifelse(tabela[,id]!="..", 
-                                                  as.numeric(tabela[,id]),NA))
+            tabela[,id] = suppressWarnings(ifelse(unlist(tabela[,id])!="..", 
+                                                  as.numeric(unlist(tabela[,id])),NA))
         }
         
         assign(serie[i],tabela)

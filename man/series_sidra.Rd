@@ -36,4 +36,3 @@ to = c("201512"), territory = "brazil",
 variable = 3135, sections = list(c(544,129316,129330)))
 }
 \keyword{sidra}
-
