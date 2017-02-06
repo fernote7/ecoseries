@@ -8,7 +8,7 @@
 #' @export
 #' @import RCurl xlsx 
 #' @importFrom readr read_csv write_csv
-#' @examples
+#' @examples 
 #' bacen = series_bacen(x=c(2465, 1242))
 
 series_bacen <- function(x, from = "", to = "", save = ""){
