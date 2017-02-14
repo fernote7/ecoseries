@@ -31,11 +31,15 @@ series_ipeadata <- function(arg1, ..., periodicity = c("Y","D"), save = ""){
         if (save == "csv"){
             for(i in len) {readr::write_csv(eval(as.symbol(serie[i])), 
                                             file = paste0(serie[i], ".csv"))}
-        } else if (save == "xls" | save == "xlsx") {
-            for(i in len) {write.xlsx(eval(as.symbol(serie[i])), 
-                                      file = paste0(serie[i], ".xlsx"), 
-                                      row.names = FALSE)}} else{ 
-                                          stop("save argument must be 'csv' or 'xlsx' ")}
+        } 
+
+        if (requireNamespace("xlsx", quietly = TRUE)) {                    
+            if (save == "xls" | save == "xlsx") {
+                for(i in len) {xlsx::write.xlsx(eval(as.symbol(serie[i])), 
+                                file = paste0(serie[i], ".xlsx"), 
+                                row.names = FALSE)}} else{
+                                stop("save argument must be 'csv' or 'xlsx' ")}
+        }
     }
     
     lista = list()

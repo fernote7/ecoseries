@@ -15,7 +15,6 @@ LazyData: true
 RoxygenNote: 6.0.1
 Imports:
     RCurl,
-    xlsx,
     rjson,
     rvest,
     stats,
@@ -23,3 +22,5 @@ Imports:
     magrittr,
     readr,
     tibble
+Suggests:
+    xlsx

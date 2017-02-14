@@ -6,7 +6,7 @@
 #' Defaults to not saving.
 #' @keywords bacen
 #' @export
-#' @import RCurl xlsx 
+#' @import RCurl 
 #' @importFrom readr read_csv write_csv
 #' @examples 
 #' bacen = series_bacen(x=c(2465, 1242))
@@ -79,11 +79,15 @@ series_bacen <- function(x, from = "", to = "", save = ""){
         if (save == "csv"){
             for(i in len) {readr::write_csv(eval(as.symbol(serie[i])), 
                                             path = paste0(serie[i], ".csv"))}
-        } else if (save == "xls" | save == "xlsx") {
-            for(i in len) {write.xlsx(eval(as.symbol(serie[i])), 
+        } 
+    
+    if (requireNamespace("xlsx", quietly = TRUE)) {        
+        if (save == "xls" | save == "xlsx") {
+            for(i in len) {xlsx::write.xlsx(eval(as.symbol(serie[i])), 
                                       file = paste0(serie[i], ".xlsx"), 
                                       row.names = FALSE)}} else{ 
                                           stop("save argument must be 'csv' or 'xlsx' ")}
+        }
     }
     
     lista = list()
