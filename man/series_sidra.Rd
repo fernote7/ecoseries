@@ -6,7 +6,7 @@
 \usage{
 series_sidra(x, from = NULL, to = NULL, territory = c(n1 = "brazil", n2 =
   "region", n3 = "state"), header = TRUE, save = "", variable = "allxp",
-  sections = NULL)
+  cl = NULL, sections = NULL)
 }
 \arguments{
 \item{x}{Sidra series number.}
@@ -24,7 +24,9 @@ Defaults to not saving.}
 
 \item{variable}{An integer describing what variable characteristics are to be returned. Defaults to all available.}
 
-\item{sections}{A vector containing the classification code in the first slot and the desired tables from this classification.}
+\item{cl}{A vector containing the classification codes in a vector}
+
+\item{sections}{A vector or a list of vectors if there are two or more classification codes containing the desired tables from the classification.}
 }
 \description{
 The different parameters define the table and its dimensions (periods, variables, territorial units and classification) to be consulted. The parameters that define the sections may vary from table to table. Henceforth, the Sidra function ranges between 2 mandatory arguments - x (the series number) and territory (the geographic scope) to 6 arguments, where you can input the time window wanted, the variables and the sections. You can only choose one variable per series per request, but multiple sections within the variable.
@@ -33,6 +35,11 @@ The different parameters define the table and its dimensions (periods, variables
 sidra=series_sidra(x = c(1612), from = 1990, to = 2015, territory = "brazil")
 sidra=series_sidra(x = c(3653), from = c("200201"), 
 to = c("201512"), territory = "brazil", 
-variable = 3135, sections = list(c(544,129316,129330)))
+variable = 3135, sections = c(129316,129330),cl = 544)
+sidra=series_sidra(x = c(3653), from = c("200201"), 
+to = c("201512"), territory = "brazil",  variable = 3135, 
+sections = "all", cl = 544)
+sidra=series_sidra(x = c(1618), from = c("201701"), to = c("201701"), territory = "brazil",
+variable = 109, sections=list(c(39427), c(39437,39441)), cl = c(49, 48))
 }
 \keyword{sidra}

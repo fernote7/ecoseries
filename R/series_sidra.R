@@ -9,7 +9,8 @@
 #' @param save A string specifying if data should be saved in csv or xlsx format. 
 #' Defaults to not saving.
 #' @param variable An integer describing what variable characteristics are to be returned. Defaults to all available.
-#' @param sections A vector containing the classification code in the first slot and the desired tables from this classification.
+#' @param cl A vector containing the classification codes in a vector
+#' @param sections A vector or a list of vectors if there are two or more classification codes containing the desired tables from the classification.
 #' @keywords sidra
 #' @export
 #' @import RCurl rjson tibble
@@ -17,10 +18,18 @@
 #' sidra=series_sidra(x = c(1612), from = 1990, to = 2015, territory = "brazil")
 #' sidra=series_sidra(x = c(3653), from = c("200201"), 
 #' to = c("201512"), territory = "brazil", 
-#' variable = 3135, sections = list(c(544,129316,129330)))
+#' variable = 3135, sections = c(129316,129330),cl = 544)
+#' sidra=series_sidra(x = c(3653), from = c("200201"), 
+#' to = c("201512"), territory = "brazil",  variable = 3135, 
+#' sections = "all", cl = 544)
+#' sidra=series_sidra(x = c(1618), from = c("201701"), to = c("201701"), territory = "brazil",
+#' variable = 109, sections=list(c(39427), c(39437,39441)), cl = c(49, 48))
 
 
-series_sidra <- function(x, from = NULL, to = NULL, territory = c(n1 = "brazil", n2 = "region", n3 = "state"), header = TRUE, save = "", variable = "allxp", sections = NULL){
+
+
+
+series_sidra <- function(x, from = NULL, to = NULL, territory = c(n1 = "brazil", n2 = "region", n3 = "state"), header = TRUE, save = "", variable = "allxp", cl = NULL,sections = NULL){
     
     x = as.character(x)
     
@@ -56,17 +65,53 @@ series_sidra <- function(x, from = NULL, to = NULL, territory = c(n1 = "brazil",
     
     
     
+    if (length(cl) > 1){
+        
+        t1=list()
+        
+        for (i in 1:length(cl)){
+            
+            t1[i] =  paste0("/c", paste0(cl[i], collapse = ","))
+            
+        }
+        
+        
+        #sections=list(c(39427), c(39437,39441))
+        
+        t2 = NULL
+        
+        # c49/39427/c48/39437,39441
+        
+        for (i in 1: length(sections)){
+            
+        
+            t2[i] = paste0(t1[i], "/", paste0(sections[[i]], collapse = ","))
+            
+            
+        }  
+        
+        sections = paste0(t2, collapse = "")
+        
+        
+    }
     
     
-    if (! is.null(sections)){
+    
+    
+    if (! is.null(sections) & length(cl) == 1){
+        
+        sections = unlist(sections)
+        sections = c(cl,sections)
+        sections = list(sections)
+        
         for (i in seq_along(sections)){
         
-        sections[i] = paste0("/c", sections[[i]][1], "/", 
-                           paste0(sections[[i]][2:length(sections[[i]])], 
-                                  collapse = ","))
+            sections[i] = paste0("/c", sections[[i]][1], "/", 
+                                 paste0(sections[[i]][2:length(sections[[i]])], 
+                                        collapse = ","))
         }
     }
-    sections = c(sections, rep('', length(x)-length(sections)))
+    sections = c(sections, rep('', (length(x)+1)-length(sections)))
     
     
     
@@ -82,11 +127,7 @@ series_sidra <- function(x, from = NULL, to = NULL, territory = c(n1 = "brazil",
                                     sections[[i]]),
                              ssl.verifyhost=FALSE, ssl.verifypeer=FALSE)
         
-        # http://api.sidra.ibge.gov.br/values/t/3653/n3/all/p/200501-201612/v/allxp/f/u/h/y/C544/129314,129315    
-        # t/3653/f/c/h/n/n1/all/V/allxp/P/all/C544/129314,129315/d/s    
-        #    t/3653/n3/all/p/200501-201612/C544/129314,129315/v/allxp/f/u/h/y 
-        
-        
+ 
         if (strsplit(tabela, " ")[[1]][1] == "Par\uE2metro") {
             
             stop("The parameters 'from', 'to' or both are misspecified")
