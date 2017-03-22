@@ -63,7 +63,7 @@ series_bacen <- function(x, from = "", to = "", save = ""){
     
     for (i in len) {
         tryCatch({
-            texto = readr::read_csv(eval(as.symbol(serie[i])), 
+            texto = readr::read_csv2(eval(as.symbol(serie[i])), 
                                     col_names = T)
             texto$data = gsub(" .*$", "", eval(texto$data))
             assign(serie[i], texto)
