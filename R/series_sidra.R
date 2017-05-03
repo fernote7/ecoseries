@@ -2,15 +2,19 @@
 #' 
 #' The different parameters define the table and its dimensions (periods, variables, territorial units and classification) to be consulted. The parameters that define the sections may vary from table to table. Henceforth, the Sidra function ranges between 2 mandatory arguments - x (the series number) and territory (the geographic scope) to 6 arguments, where you can input the time window wanted, the variables and the sections. You can only choose one variable per series per request, but multiple sections within the variable.
 #' @param x Sidra series number.
-#' @param from A string or character vector specifying where the series shall start. Defaults to 1980.
-#' @param to A string or character vector specifying where the series shall end. Defaults to current year.
+#' @param from A string or character vector specifying where the series shall start. Defaults
+#' to 1980.
+#' @param to A string or character vector specifying where the series shall end. Defaults to
+#'  current year.
 #' @param territory Specifies the desired territorial levels.
 #' @param header Logical. Either TRUE or FALSE.
 #' @param save A string specifying if data should be saved in csv or xlsx format. 
 #' Defaults to not saving.
-#' @param variable An integer describing what variable characteristics are to be returned. Defaults to all available.
+#' @param variable An integer describing what variable characteristics are to be returned. 
+#' Defaults to all available.
 #' @param cl A vector containing the classification codes in a vector
-#' @param sections A vector or a list of vectors if there are two or more classification codes containing the desired tables from the classification.
+#' @param sections A vector or a list of vectors if there are two or more classification
+#' codes containing the desired tables from the classification.
 #' @param formating Logical. Data is returned in a tibble with dates and values parsed. 
 #' @keywords sidra
 #' @export
@@ -23,7 +27,8 @@
 #' sidra=series_sidra(x = c(3653), from = c("200201"), 
 #' to = c("201512"), territory = "brazil",  variable = 3135, 
 #' sections = "all", cl = 544)
-#' sidra=series_sidra(x = c(1618), from = c("201701"), to = c("201701"), territory = "brazil",
+#' sidra=series_sidra(x = c(1618), from = c("201701"), to = c("201701"), 
+#' territory = "brazil",
 #' variable = 109, sections=list(c(39427), c(39437,39441)), cl = c(49, 48))
 
 
@@ -156,23 +161,25 @@ series_sidra <- function(x, from = NULL, to = NULL, territory = c(n1 = "brazil",
                 
                 
                 id2 = which(colnames(tabela2)== "D4N")
-                id3 = which(colnames(tabela) == "Mês" | colnames(tabela) == "Ano" |
-                            colnames(tabela) == "Ano (Código)" | 
-                                colnames(tabela) == "Mês (Código)")
+                id3 = which(colnames(tabela) == "M\u00EAs" | colnames(tabela) == "Ano" |
+                            colnames(tabela) == "Ano (C\u00F3digo)" | 
+                                colnames(tabela) == "M\u00EAs (C\u00F3digo)")
                 
-                if (colnames(tabela[,id3]) == "Ano (Código)"){
+                if (colnames(tabela[,id3]) == "Ano (C\u00F3digo)"){
                     colnames(tabela[,id3]) = "Ano"}
-                if (colnames(tabela[,id3]) == "Mês (Código)") {
-                    colnames(tabela[,id3]) = "Mês"}               
+                if (colnames(tabela[,id3]) == "M\u00EAs (C\u00F3digo)") {
+                    colnames(tabela[,id3]) = "M\u00EAs"}               
                     
                     
-                tabela = as_data_frame(cbind(tabela[,id3], tabela[,id2], tabela[,id]))
+                tabela = tibble::as_data_frame(cbind(tabela[,id3], 
+                                                     tabela[,id2], 
+                                                     tabela[,id]))
                 
                 
                 tryCatch({
-                tabela$mes <- sapply(tabela$Mês, 
+                tabela$mes <- sapply(tabela["M\u00EA"], 
                                      FUN = function(x){substr(x,1,(nchar(x)-5))}) 
-                tabela$ano <- sapply(tabela$Mês, 
+                tabela$ano <- sapply(tabela["M\u00EA"], 
                                      FUN = function(x){substr(x,(nchar(x)-3), nchar(x))}) 
                 
                 
@@ -189,15 +196,15 @@ series_sidra <- function(x, from = NULL, to = NULL, territory = c(n1 = "brazil",
                 tabela$mes[tabela$mes == "novembro"] <- "11"
                 tabela$mes[tabela$mes == "dezembro"] <- "12"
                 
-                tabela$mes_ano <- paste0(tabela$ano, "-",tabela$mes, "-01")
-                tabela$mes_ano <- as.Date(tabela$mes_ano)
+                tabela$mes_ano <- base::paste0(tabela$ano, "-",tabela$mes, "-01")
+                tabela$mes_ano <- base::as.Date(tabela$mes_ano)
                 tabela <- tabela[,c(6,2,3)]
                 colnames(tabela)[1] <- "Data"
                 
                 }, error = function(e){
                     
-                    tabela$Ano <- paste0(tabela$Ano, "-01-01")
-                    tabela$Ano <- as.Date(tabela$Ano)
+                    tabela$Ano <- base::paste0(tabela$Ano, "-01-01")
+                    tabela$Ano <- base::as.Date(tabela$Ano)
                     
                     
                 })
