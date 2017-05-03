@@ -11,6 +11,7 @@
 #' @param variable An integer describing what variable characteristics are to be returned. Defaults to all available.
 #' @param cl A vector containing the classification codes in a vector
 #' @param sections A vector or a list of vectors if there are two or more classification codes containing the desired tables from the classification.
+#' @param formating Logical. Data is returned in a tibble with dates and values parsed. 
 #' @keywords sidra
 #' @export
 #' @import RCurl rjson tibble
@@ -159,6 +160,12 @@ series_sidra <- function(x, from = NULL, to = NULL, territory = c(n1 = "brazil",
                             colnames(tabela) == "Ano (Código)" | 
                                 colnames(tabela) == "Mês (Código)")
                 
+                if (colnames(tabela[,id3]) == "Ano (Código)"){
+                    colnames(tabela[,id3]) = "Ano"}
+                if (colnames(tabela[,id3]) == "Mês (Código)") {
+                    colnames(tabela[,id3]) = "Mês"}               
+                    
+                    
                 tabela = as_data_frame(cbind(tabela[,id3], tabela[,id2], tabela[,id]))
                 
                 
