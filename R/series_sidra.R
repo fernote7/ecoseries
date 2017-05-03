@@ -177,9 +177,9 @@ series_sidra <- function(x, from = NULL, to = NULL, territory = c(n1 = "brazil",
                 
                 
                 tryCatch({
-                tabela$mes <- sapply(tabela["M\u00EA"], 
+                tabela$mes <- sapply(tabela["M\u00EAs"], 
                                      FUN = function(x){substr(x,1,(nchar(x)-5))}) 
-                tabela$ano <- sapply(tabela["M\u00EA"], 
+                tabela$ano <- sapply(tabela["M\u00EAs"], 
                                      FUN = function(x){substr(x,(nchar(x)-3), nchar(x))}) 
                 
                 
