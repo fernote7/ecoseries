@@ -29,7 +29,7 @@
 
 
 
-series_sidra <- function(x, from = NULL, to = NULL, territory = c(n1 = "brazil", n2 = "region", n3 = "state"), header = TRUE, save = "", variable = "allxp", cl = NULL,sections = NULL){
+series_sidra <- function(x, from = NULL, to = NULL, territory = c(n1 = "brazil", n2 = "region", n3 = "state"), header = TRUE, save = "", variable = "allxp", cl = NULL,sections = NULL, formating = FALSE){
     
     x = as.character(x)
     
@@ -144,7 +144,60 @@ series_sidra <- function(x, from = NULL, to = NULL, territory = c(n1 = "brazil",
             t1 = paste("tabela", x, sep="_")
             tabela = rjson::fromJSON(tabela)
             tabela = tibble::as_data_frame(do.call("rbind", tabela))
-            if (header == "y"){
+            
+            
+            if (! formating == FALSE){
+                
+                tabela2 = tabela
+                colnames(tabela) = unlist(tabela[1,])
+                tabela = tabela[-1,]
+                id = which(colnames(tabela)=="V" | colnames(tabela)=="Valor")
+                
+                
+                id2 = which(colnames(tabela2)== "D4N")
+                id3 = which(colnames(tabela) == "Mês" | colnames(tabela) == "Ano" |
+                            colnames(tabela) == "Ano (Código)" | 
+                                colnames(tabela) == "Mês (Código)")
+                
+                tabela = as_data_frame(cbind(tabela[,id3], tabela[,id2], tabela[,id]))
+                
+                
+                tryCatch({
+                tabela$mes <- sapply(tabela$Mês, 
+                                     FUN = function(x){substr(x,1,(nchar(x)-5))}) 
+                tabela$ano <- sapply(tabela$Mês, 
+                                     FUN = function(x){substr(x,(nchar(x)-3), nchar(x))}) 
+                
+                
+                tabela$mes[tabela$mes == "janeiro"] <- "01"
+                tabela$mes[tabela$mes == "fevereiro"] <- "02"
+                tabela$mes[tabela$mes == "março"] <- "03"
+                tabela$mes[tabela$mes == "abril"] <- "04"
+                tabela$mes[tabela$mes == "maio"] <- "05"
+                tabela$mes[tabela$mes == "junho"] <- "06"
+                tabela$mes[tabela$mes == "julho"] <- "07"
+                tabela$mes[tabela$mes == "agosto"] <- "08"
+                tabela$mes[tabela$mes == "setembro"] <- "09"
+                tabela$mes[tabela$mes == "outubro"] <- "10"
+                tabela$mes[tabela$mes == "novembro"] <- "11"
+                tabela$mes[tabela$mes == "dezembro"] <- "12"
+                
+                tabela$mes_ano <- paste0(tabela$ano, "-",tabela$mes, "-01")
+                tabela$mes_ano <- as.Date(tabela$mes_ano)
+                tabela <- tabela[,c(6,2,3)]
+                colnames(tabela)[1] <- "Data"
+                
+                }, error = function(e){
+                    
+                    tabela$Ano <- paste0(tabela$Ano, "-01-01")
+                    tabela$Ano <- as.Date(tabela$Ano)
+                    
+                    
+                })
+                
+                rm(tabela2)
+                
+            } else if (header == "y"){
                 
                 colnames(tabela) = unlist(tabela[1,])
                 tabela = tabela[-1,]
@@ -153,14 +206,11 @@ series_sidra <- function(x, from = NULL, to = NULL, territory = c(n1 = "brazil",
             #Transformando a coluna V em valor
             
             valor = NULL
-            
             id = which(colnames(tabela)=="V" | colnames(tabela)=="Valor")
-            
-            #tabela2 = tabela
-            #tabela2[tabela2[,id] ==  "..",id] <- NA
-            #tabela2[,id] <- as.numeric(tabela2[,id])
             tabela[,id] = suppressWarnings(ifelse(unlist(tabela[,id])!="..", 
                                                   as.numeric(unlist(tabela[,id])),NA))
+            
+            
         }
         
         assign(serie[i],tabela)
