@@ -20,7 +20,7 @@ Defaults to not saving.}
 A function to extract IPEA series using their API
 }
 \examples{
-ipea=series_ipeadata(394221910, periodicity = c("Y")) 
+# ipea=series_ipeadata(394221910, periodicity = c("Y")) 
 }
 \keyword{ipea}
 \keyword{ipeadata}

@@ -1,6 +1,6 @@
 Package: ecoseries
 Title: An R Interface to Brazilian Central Bank and Sidra APIs and the IPEA Data
-Version: 0.1.2
+Version: 0.1.3
 Date: 2017-04-27
 Authors@R: c(person("Fernando", "Teixeira", email = "fernando.teixeira@fgv.br", role = c("aut", "cre")),
 			 person("Jonatha", "Azevedo", email = "jonatha.azevedo@fgv.br", role = "aut"))

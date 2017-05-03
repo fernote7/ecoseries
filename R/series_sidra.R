@@ -21,15 +21,15 @@
 #' @import RCurl rjson tibble
 #' @examples
 #' sidra=series_sidra(x = c(1612), from = 1990, to = 2015, territory = "brazil")
-#' sidra=series_sidra(x = c(3653), from = c("200201"), 
-#' to = c("201512"), territory = "brazil", 
-#' variable = 3135, sections = c(129316,129330),cl = 544)
-#' sidra=series_sidra(x = c(3653), from = c("200201"), 
-#' to = c("201512"), territory = "brazil",  variable = 3135, 
-#' sections = "all", cl = 544)
-#' sidra=series_sidra(x = c(1618), from = c("201701"), to = c("201701"), 
-#' territory = "brazil",
-#' variable = 109, sections=list(c(39427), c(39437,39441)), cl = c(49, 48))
+#' # sidra=series_sidra(x = c(3653), from = c("200201"), 
+#' # to = c("201512"), territory = "brazil", 
+#' # variable = 3135, sections = c(129316,129330),cl = 544)
+#' # sidra=series_sidra(x = c(3653), from = c("200201"), 
+#' # to = c("201512"), territory = "brazil",  variable = 3135, 
+#' # sections = "all", cl = 544)
+#' # sidra=series_sidra(x = c(1618), from = c("201701"), to = c("201701"), 
+#' # territory = "brazil",
+#' # variable = 109, sections=list(c(39427), c(39437,39441)), cl = c(49, 48))
 
 
 
@@ -185,7 +185,7 @@ series_sidra <- function(x, from = NULL, to = NULL, territory = c(n1 = "brazil",
                 
                 tabela$mes[tabela$mes == "janeiro"] <- "01"
                 tabela$mes[tabela$mes == "fevereiro"] <- "02"
-                tabela$mes[tabela$mes == "março"] <- "03"
+                tabela$mes[tabela$mes == "mar\u00E7o"] <- "03"
                 tabela$mes[tabela$mes == "abril"] <- "04"
                 tabela$mes[tabela$mes == "maio"] <- "05"
                 tabela$mes[tabela$mes == "junho"] <- "06"

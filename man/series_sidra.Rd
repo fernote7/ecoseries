@@ -39,14 +39,14 @@ The different parameters define the table and its dimensions (periods, variables
 }
 \examples{
 sidra=series_sidra(x = c(1612), from = 1990, to = 2015, territory = "brazil")
-sidra=series_sidra(x = c(3653), from = c("200201"), 
-to = c("201512"), territory = "brazil", 
-variable = 3135, sections = c(129316,129330),cl = 544)
-sidra=series_sidra(x = c(3653), from = c("200201"), 
-to = c("201512"), territory = "brazil",  variable = 3135, 
-sections = "all", cl = 544)
-sidra=series_sidra(x = c(1618), from = c("201701"), to = c("201701"), 
-territory = "brazil",
-variable = 109, sections=list(c(39427), c(39437,39441)), cl = c(49, 48))
+# sidra=series_sidra(x = c(3653), from = c("200201"), 
+# to = c("201512"), territory = "brazil", 
+# variable = 3135, sections = c(129316,129330),cl = 544)
+# sidra=series_sidra(x = c(3653), from = c("200201"), 
+# to = c("201512"), territory = "brazil",  variable = 3135, 
+# sections = "all", cl = 544)
+# sidra=series_sidra(x = c(1618), from = c("201701"), to = c("201701"), 
+# territory = "brazil",
+# variable = 109, sections=list(c(39427), c(39437,39441)), cl = c(49, 48))
 }
 \keyword{sidra}
