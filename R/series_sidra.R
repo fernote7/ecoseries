@@ -203,9 +203,10 @@ series_sidra <- function(x, from = NULL, to = NULL, territory = c(n1 = "brazil",
                 
                 }, error = function(e){
                     
+                    if("Ano" %in% colnames(sidra$serie_1618)){ 
                     tabela$Ano <- base::paste0(tabela$Ano, "-01-01")
                     tabela$Ano <- base::as.Date(tabela$Ano)
-                    
+                    }
                     
                 })
                 
