@@ -5,8 +5,8 @@
 \title{A function to extract Sidra series using their API}
 \usage{
 series_sidra(x, from = NULL, to = NULL, territory = c(n1 = "brazil", n2 =
-  "region", n3 = "state"), header = TRUE, save = "", variable = "allxp",
-  cl = NULL, sections = NULL, formating = FALSE)
+  "region", n3 = "state"), save = "", variable = "allxp", cl = NULL,
+  sections = NULL)
 }
 \arguments{
 \item{x}{Sidra series number.}
@@ -19,8 +19,6 @@ current year.}
 
 \item{territory}{Specifies the desired territorial levels.}
 
-\item{header}{Logical. Either TRUE or FALSE.}
-
 \item{save}{A string specifying if data should be saved in csv or xlsx format. 
 Defaults to not saving.}
 
@@ -31,8 +29,6 @@ Defaults to all available.}
 
 \item{sections}{A vector or a list of vectors if there are two or more classification
 codes containing the desired tables from the classification.}
-
-\item{formating}{Logical. Data is returned in a tibble with dates and values parsed.}
 }
 \description{
 The different parameters define the table and its dimensions (periods, variables, territorial units and classification) to be consulted. The parameters that define the sections may vary from table to table. Henceforth, the Sidra function ranges between 2 mandatory arguments - x (the series number) and territory (the geographic scope) to 6 arguments, where you can input the time window wanted, the variables and the sections. You can only choose one variable per series per request, but multiple sections within the variable.
