@@ -162,7 +162,7 @@ series_sidra <- function(x, from = NULL, to = NULL, territory = c(n1 = "brazil",
                 colnames(tabela[,id3]) = "M\u00EAs"}
             
             
-            if ( colnames(tabela[,id3]) == "M\u00EAs" & length(tabela[,id3]) > 1){
+            if ( colnames(tabela[,id3]) == "M\u00EAs" & length(tabela[[id3]]) > 1){
             
             tabela$mes <- sapply(tabela["M\u00EAs"], 
                                  FUN = function(x){substr(x,1,(nchar(x)-5))}) 
@@ -191,7 +191,7 @@ series_sidra <- function(x, from = NULL, to = NULL, territory = c(n1 = "brazil",
             
             }
                 
-            if(colnames(tabela[,id3]) == "Ano" & length(tabela[,id3]) > 1){ 
+            if(colnames(tabela[,id3]) == "Ano" & length(tabela[[id3]]) > 1){ 
                 tabela$Ano <- base::paste0(tabela$Ano, "-01-01")
                 tabela$Ano <- base::as.Date(tabela$Ano)
                 colnames(tabela)[id3] <- "Data"
