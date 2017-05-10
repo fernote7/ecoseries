@@ -5,8 +5,7 @@
 \title{A function to extract Sidra series using their API}
 \usage{
 series_sidra(x, from = NULL, to = NULL, territory = c(n1 = "brazil", n2 =
-  "region", n3 = "state"), save = "", variable = "allxp", cl = NULL,
-  sections = NULL)
+  "region", n3 = "state"), variable = "allxp", cl = NULL, sections = NULL)
 }
 \arguments{
 \item{x}{Sidra series number.}
@@ -18,9 +17,6 @@ to 1980.}
 current year.}
 
 \item{territory}{Specifies the desired territorial levels.}
-
-\item{save}{A string specifying if data should be saved in csv or xlsx format. 
-Defaults to not saving.}
 
 \item{variable}{An integer describing what variable characteristics are to be returned. 
 Defaults to all available.}
@@ -41,7 +37,7 @@ sidra=series_sidra(x = c(1612), from = 1990, to = 2015, territory = "brazil")
 # sidra=series_sidra(x = c(3653), from = c("200201"), 
 # to = c("201512"), territory = "brazil",  variable = 3135, 
 # sections = "all", cl = 544)
-# sidra=series_sidra(x = c(1618), from = c("201701"), to = c("201701"), 
+# sidra=series_sidra(x = c(1618), from = c("201703"), to = c("201703"), 
 # territory = "brazil",
 # variable = 109, sections=list(c(39427), c(39437,39441)), cl = c(49, 48))
 }

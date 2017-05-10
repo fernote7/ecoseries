@@ -7,8 +7,6 @@
 #' @param to A string or character vector specifying where the series shall end. Defaults to
 #'  current year.
 #' @param territory Specifies the desired territorial levels.
-#' @param save A string specifying if data should be saved in csv or xlsx format. 
-#' Defaults to not saving.
 #' @param variable An integer describing what variable characteristics are to be returned. 
 #' Defaults to all available.
 #' @param cl A vector containing the classification codes in a vector
@@ -25,15 +23,16 @@
 #' # sidra=series_sidra(x = c(3653), from = c("200201"), 
 #' # to = c("201512"), territory = "brazil",  variable = 3135, 
 #' # sections = "all", cl = 544)
-#' # sidra=series_sidra(x = c(1618), from = c("201701"), to = c("201701"), 
+#' # sidra=series_sidra(x = c(1618), from = c("201703"), to = c("201703"), 
 #' # territory = "brazil",
 #' # variable = 109, sections=list(c(39427), c(39437,39441)), cl = c(49, 48))
+#' # trim - 1620
 
 
 
 
 
-series_sidra <- function(x, from = NULL, to = NULL, territory = c(n1 = "brazil", n2 = "region", n3 = "state"), save = "", variable = "allxp", cl = NULL,sections = NULL){
+series_sidra <- function(x, from = NULL, to = NULL, territory = c(n1 = "brazil", n2 = "region", n3 = "state"), variable = "allxp", cl = NULL,sections = NULL){
     
     x = as.character(x)
     
@@ -212,6 +211,8 @@ series_sidra <- function(x, from = NULL, to = NULL, territory = c(n1 = "brazil",
         assign(serie[i],tabela)
         rm(tabela)
     }
+    
+
     
     lista = list()
     ls_df = ls()[grepl('data.frame', sapply(ls(), function(x) class(get(x))))]
