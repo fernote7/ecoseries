@@ -152,15 +152,9 @@ series_sidra <- function(x, from = NULL, to = NULL, territory = c(n1 = "brazil",
             
             id2 = which(colnames(tabela2)== "D4N")
             id3 = which(colnames(tabela) == "M\u00EAs" | colnames(tabela) == "Ano" |
-                        colnames(tabela) == "Ano (C\u00F3digo)" | 
-                            colnames(tabela) == "M\u00EAs (C\u00F3digo)")
+                            colnames(tabela) == "Trimestre")
             
-            if (colnames(tabela[,id3]) == "Ano (C\u00F3digo)"){
-                colnames(tabela[,id3]) = "Ano"}
-            if (colnames(tabela[,id3]) == "M\u00EAs (C\u00F3digo)") {
-                colnames(tabela[,id3]) = "M\u00EAs"}
-            
-            
+
             if ( colnames(tabela[,id3]) == "M\u00EAs" & length(tabela[[id3]]) > 1){
             
             tabela$mes <- sapply(tabela["M\u00EAs"], 
