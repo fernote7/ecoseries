@@ -21,5 +21,6 @@ Imports:
     xml2,
     magrittr,
     readr,
-    tibble
+    tibble, 
+    zoo
 Suggests: xlsx
