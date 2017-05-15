@@ -14,7 +14,7 @@
 #' codes containing the desired tables from the classification.
 #' @keywords sidra
 #' @export
-#' @import RCurl rjson tibble
+#' @import RCurl rjson tibble zoo
 #' @examples
 #' sidra=series_sidra(x = c(1612), from = 1990, to = 2015, territory = "brazil")
 #' # sidra=series_sidra(x = c(3653), from = c("200201"), 
@@ -26,7 +26,7 @@
 #' # sidra=series_sidra(x = c(1618), from = c("201703"), to = c("201703"), 
 #' # territory = "brazil",
 #' # variable = 109, sections=list(c(39427), c(39437,39441)), cl = c(49, 48))
-#' # trim - 1620
+#' # trim - x = 1620; from = 199001; to = 201701;  territory = "brazil"; sections=list(c(90687)); cl =c(11255)
 
 
 
@@ -60,7 +60,7 @@ series_sidra <- function(x, from = NULL, to = NULL, territory = c(n1 = "brazil",
                               region = "n2/all", 
                               state = "n3/all")
     
-    header = "y"
+    header = "y/"
     
 
     if (length(cl) > 1){
@@ -157,30 +157,30 @@ series_sidra <- function(x, from = NULL, to = NULL, territory = c(n1 = "brazil",
 
             if ( colnames(tabela[,id3]) == "M\u00EAs" & length(tabela[[id3]]) > 1){
             
-            tabela$mes <- sapply(tabela["M\u00EAs"], 
-                                 FUN = function(x){substr(x,1,(nchar(x)-5))}) 
-            tabela$ano <- sapply(tabela["M\u00EAs"], 
-                                 FUN = function(x){substr(x,(nchar(x)-3), nchar(x))}) 
-            
-            
-            tabela$mes[tabela$mes == "janeiro"] <- "01"
-            tabela$mes[tabela$mes == "fevereiro"] <- "02"
-            tabela$mes[tabela$mes == "mar\u00E7o"] <- "03"
-            tabela$mes[tabela$mes == "abril"] <- "04"
-            tabela$mes[tabela$mes == "maio"] <- "05"
-            tabela$mes[tabela$mes == "junho"] <- "06"
-            tabela$mes[tabela$mes == "julho"] <- "07"
-            tabela$mes[tabela$mes == "agosto"] <- "08"
-            tabela$mes[tabela$mes == "setembro"] <- "09"
-            tabela$mes[tabela$mes == "outubro"] <- "10"
-            tabela$mes[tabela$mes == "novembro"] <- "11"
-            tabela$mes[tabela$mes == "dezembro"] <- "12"
-            
-            tabela$mes_ano <- base::paste0(tabela$ano, "-",tabela$mes, "-01")
-            tabela$mes_ano <- base::as.Date(tabela$mes_ano)
-            tabela["M\u00EAs"] <- tabela$mes_ano
-            tabela <- tabela[,1:(length(tabela)-3)]
-            colnames(tabela)[id3] <- "Data"
+                tabela$mes <- sapply(tabela["M\u00EAs"], 
+                                     FUN = function(x){substr(x,1,(nchar(x)-5))}) 
+                tabela$ano <- sapply(tabela["M\u00EAs"], 
+                                     FUN = function(x){substr(x,(nchar(x)-3), nchar(x))}) 
+                
+                
+                tabela$mes[tabela$mes == "janeiro"] <- "01"
+                tabela$mes[tabela$mes == "fevereiro"] <- "02"
+                tabela$mes[tabela$mes == "mar\u00E7o"] <- "03"
+                tabela$mes[tabela$mes == "abril"] <- "04"
+                tabela$mes[tabela$mes == "maio"] <- "05"
+                tabela$mes[tabela$mes == "junho"] <- "06"
+                tabela$mes[tabela$mes == "julho"] <- "07"
+                tabela$mes[tabela$mes == "agosto"] <- "08"
+                tabela$mes[tabela$mes == "setembro"] <- "09"
+                tabela$mes[tabela$mes == "outubro"] <- "10"
+                tabela$mes[tabela$mes == "novembro"] <- "11"
+                tabela$mes[tabela$mes == "dezembro"] <- "12"
+                
+                tabela$mes_ano <- base::paste0(tabela$ano, "-",tabela$mes, "-01")
+                tabela$mes_ano <- base::as.Date(tabela$mes_ano)
+                tabela["M\u00EAs"] <- tabela$mes_ano
+                tabela <- tabela[,1:(length(tabela)-3)]
+                colnames(tabela)[id3] <- "Data"
             
             }
                 
@@ -190,6 +190,42 @@ series_sidra <- function(x, from = NULL, to = NULL, territory = c(n1 = "brazil",
                 colnames(tabela)[id3] <- "Data"
                 
             }
+            
+            if(colnames(tabela[,id3]) == "Trimestre" & length(tabela[[id3]]) > 1){
+                
+                tabela$trimestre <- sapply(tabela["Trimestre"], 
+                                     FUN = function(x){substr(x,1,1)}) 
+                tabela$ano <- sapply(tabela["Trimestre"], 
+                                     FUN = function(x){substr(x,(nchar(x)-3), nchar(x))}) 
+                
+                
+                # tabela$trimestre <- as.numeric(unlist(tabela$trimestre))
+                # 
+                # tabela$mes[tabela$mes == "janeiro"] <- "01"
+                # tabela$mes[tabela$mes == "fevereiro"] <- "02"
+                # tabela$mes[tabela$mes == "mar\u00E7o"] <- "03"
+                # tabela$mes[tabela$mes == "abril"] <- "04"
+                # tabela$mes[tabela$mes == "maio"] <- "05"
+                # tabela$mes[tabela$mes == "junho"] <- "06"
+                # tabela$mes[tabela$mes == "julho"] <- "07"
+                # tabela$mes[tabela$mes == "agosto"] <- "08"
+                # tabela$mes[tabela$mes == "setembro"] <- "09"
+                # tabela$mes[tabela$mes == "outubro"] <- "10"
+                # tabela$mes[tabela$mes == "novembro"] <- "11"
+                # tabela$mes[tabela$mes == "dezembro"] <- "12"
+                
+                tabela$tri_ano <- base::paste0(tabela$ano, "-",tabela$trimestre)
+                tabela$tri_ano <- zoo::as.yearqtr(tabela$tri_ano)
+                tabela$tri_ano <- base::as.Date(tabela$tri_ano)
+                tabela["Trimestre"] <- tabela$tri_ano
+                tabela <- tabela[,1:(length(tabela)-3)]
+                colnames(tabela)[id3] <- "Data"    
+                
+                
+                
+                
+            }
+            
                 
             #Transformando a coluna V em valor
             
