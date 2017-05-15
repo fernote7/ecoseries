@@ -30,7 +30,7 @@ codes containing the desired tables from the classification.}
 The different parameters define the table and its dimensions (periods, variables, territorial units and classification) to be consulted. The parameters that define the sections may vary from table to table. Henceforth, the Sidra function ranges between 2 mandatory arguments - x (the series number) and territory (the geographic scope) to 6 arguments, where you can input the time window wanted, the variables and the sections. You can only choose one variable per series per request, but multiple sections within the variable.
 }
 \examples{
-sidra=series_sidra(x = c(1612), from = "1990", to = "2015", territory = "brazil")
+sidra=series_sidra(x = c(1612), from = 1990, to = 2015, territory = "brazil")
 # sidra=series_sidra(x = c(3653), from = c("200201"), 
 # to = c("201512"), territory = "brazil", 
 # variable = 3135, sections = c(129316,129330),cl = 544)
@@ -40,5 +40,6 @@ sidra=series_sidra(x = c(1612), from = "1990", to = "2015", territory = "brazil"
 # sidra=series_sidra(x = c(1618), from = c("201703"), to = c("201703"), 
 # territory = "brazil",
 # variable = 109, sections=list(c(39427), c(39437,39441)), cl = c(49, 48))
+# trim - x = 1620; from = 199001; to = 201701;  territory = "brazil"; sections=list(c(90687)); cl =c(11255); variable = 583
 }
 \keyword{sidra}
