@@ -9,7 +9,7 @@
 #' @import rvest xml2 stats utils
 #' @importFrom readr read_csv write_csv
 #' @examples
-#' # ipea=series_ipeadata(394221910, periodicity = c("Y")) 
+#' # ipea=series_ipeadata(162225812, periodicity = c("D")) 
 
 
 series_ipeadata <- function(arg1, ..., periodicity = c("Y","D"), save = ""){

@@ -2,7 +2,7 @@
 
 aux_ipeadata <- function(arg1, periodicity){
 
-    #arg1 = 394221910; arg2 = 40940; periodicity = "D"; save=""; i =1
+    #arg1 = 394221910; arg2 = 40940; periodicity = "D"; save=""; i =1; arg1 = 1256135866
     
     inputs = as.character(list(arg1))
 
@@ -10,28 +10,36 @@ aux_ipeadata <- function(arg1, periodicity){
                                inputs, "&module=M"))
     
     dados=pagina %>%
-        rvest::html_nodes(".dxgvDataRow")%>%
+        rvest::html_nodes("td.dxgv")%>%
         rvest::html_text()
     
-    dados=gsub("\r\n\t\t\t", "", dados)
+    # dados=gsub("", "", dados)
     #dados=gsub("[[:punct:]]","",dados)
     
+    dados <- dados[nchar(dados)>0]
+    even_indexes<-seq(2,length(dados),2)
+    odd_indexes<-seq(1,length(dados),2)
+    
+    t0 <- dados[odd_indexes]
+    t1 <- dados[even_indexes]
+    t_fin <- as.data.frame(cbind(t0,t1))
+    
+    
+    
     if (periodicity == "D"){
-        data=substr(dados, 1, 10)
-        valor=substr(dados, 11, 100)
+        t_fin[,1] <- as.Date(t_fin[,1], format = "%d/%m/%Y")
     } else if (periodicity == "Y"){
-        data=substr(dados, 1, 4)
-        valor=substr(dados, 5, 100)
+        t_fin[,1] <- as.Date(paste(t_fin[,1], 1, 1, sep = "-"))
     } else if (periodicity == "M"){
-        data=substr(dados, 1, 7)
-        valor=substr(dados, 8, 100)
+        t_fin[,1] <- as.Date(paste(substr(t_fin[,1], 1,4),substr(t_fin[,1], 6,7), 1, sep = "-"))
     } else { stop("Wrong periodicity. This field accepts 'Y', 'M' or 'D' as arguments.")}
     
-    valor = gsub("\\.", "", valor)
+    valor = gsub("\\.", "", t_fin[,2])
     valor = gsub(",", ".",valor)
     valor = as.numeric(valor)
-    dat = tibble::tibble(data,valor)
+    dat = tibble::tibble(t_fin[,1],valor)
     dat = dat[stats::complete.cases(dat),]
+    colnames(dat) <- c("data", "valor")
 
     return(dat)
 }
