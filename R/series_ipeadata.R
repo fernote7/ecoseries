@@ -12,7 +12,7 @@
 #' # ipea=series_ipeadata(162225812, periodicity = c("D")) 
 
 
-series_ipeadata <- function(arg1, ..., periodicity = c("Y","D"), save = ""){
+series_ipeadata <- function(arg1, ..., periodicity = c("Y","D", 'M', 'Q'), save = ""){
     
     inputs = as.character(list(arg1, ...))
     serie = mapply(paste0, "serie_", inputs, USE.NAMES = FALSE)

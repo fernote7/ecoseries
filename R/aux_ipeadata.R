@@ -2,7 +2,8 @@
 
 aux_ipeadata <- function(arg1, periodicity){
 
-    #arg1 = 394221910; arg2 = 40940; periodicity = "D"; save=""; i =1; arg1 = 1256135866
+    #arg1 = 394221910; arg2 = 40940; periodicity = "M"; save=""; i =1; arg1 = 1256135866
+    #periodicity = "Q"; save=""; i =1; arg1 = 1198638884
     
     inputs = as.character(list(arg1))
 
@@ -31,8 +32,16 @@ aux_ipeadata <- function(arg1, periodicity){
     } else if (periodicity == "Y"){
         t_fin[,1] <- as.Date(paste(t_fin[,1], 1, 1, sep = "-"))
     } else if (periodicity == "M"){
-        t_fin[,1] <- as.Date(paste(substr(t_fin[,1], 1,4),substr(t_fin[,1], 6,7), 1, sep = "-"))
-    } else { stop("Wrong periodicity. This field accepts 'Y', 'M' or 'D' as arguments.")}
+        t_fin[,1] <- as.Date(paste(substr(t_fin[,1], 1,4),
+                                   substr(t_fin[,1], 6,7), 1, sep = "-"))
+    } else if (periodicity == "Q") {
+        t_fin[,1] <- base::gsub("T1", "01", t_fin[,1])
+        t_fin[,1] <- base::gsub("T2", "04", t_fin[,1])
+        t_fin[,1] <- base::gsub("T3", "07", t_fin[,1])
+        t_fin[,1] <- base::gsub("T4", "10", t_fin[,1])
+        t_fin[,1] <- as.Date(paste(substr(t_fin[,1], 1,4),
+                                   substr(t_fin[,1], 6,7), 1, sep = "-"))   
+    } else { stop("Wrong periodicity. This field accepts 'Y', 'M', 'Q' or 'D' as arguments.")}
     
     valor = gsub("\\.", "", t_fin[,2])
     valor = gsub(",", ".",valor)

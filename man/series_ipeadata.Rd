@@ -4,7 +4,7 @@
 \alias{series_ipeadata}
 \title{A function to extract IPEA series using their API}
 \usage{
-series_ipeadata(arg1, ..., periodicity = c("Y", "D"), save = "")
+series_ipeadata(arg1, ..., periodicity = c("Y", "D", "M", "Q"), save = "")
 }
 \arguments{
 \item{arg1}{ipea series number.}
@@ -20,7 +20,7 @@ Defaults to not saving.}
 A function to extract IPEA series using their API
 }
 \examples{
-# ipea=series_ipeadata(394221910, periodicity = c("Y")) 
+# ipea=series_ipeadata(162225812, periodicity = c("D")) 
 }
 \keyword{ipea}
 \keyword{ipeadata}

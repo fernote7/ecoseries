@@ -4,3 +4,6 @@
 .Ruserdata
 packrat/lib*/
 R/series_fred.R
+.travis.yml
+appveyor.yml
+README.md
